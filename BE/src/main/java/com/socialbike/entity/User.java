@@ -6,6 +6,7 @@ import javax.persistence.Id;
 
 /**
  * Created by SAN on 23/08/2016.
+ * Esto me gusta
  */
 @Entity
 public class User {
