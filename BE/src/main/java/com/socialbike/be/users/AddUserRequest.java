@@ -5,11 +5,21 @@ package com.socialbike.be.users;
  */
 public class AddUserRequest {
 
+    private String firebaseId;
     private String email;
+    private String password;
     private String displayName;
     private String pictureUrl;
     private int age;
     private Sex sex;
+
+    public String getFirebaseId() {
+        return firebaseId;
+    }
+
+    public void setFirebaseId(String firebaseId) {
+        this.firebaseId = firebaseId;
+    }
 
     public String getEmail() {
         return email;
@@ -17,6 +27,14 @@ public class AddUserRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getDisplayName() {

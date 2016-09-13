@@ -28,9 +28,11 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     public void addUser(@RequestBody AddUserRequest addUserRequest){
         User user = new User();
+        user.setFirebaseId(addUserRequest.getFirebaseId());
         user.setAge(addUserRequest.getAge());
         user.setDisplayName(addUserRequest.getDisplayName());
         user.setEmail(addUserRequest.getEmail());
+        user.setPassword(addUserRequest.getPassword());
         user.setSex(addUserRequest.getSex());
         user.setPictureUrl(addUserRequest.getPictureUrl());
         userRepository.save(user);
