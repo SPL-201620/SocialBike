@@ -16,24 +16,24 @@ public class GroupRoute {
     @Id
     @GeneratedValue
     private long id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinTable
             (
                     name="GROUP_ROUTE_USER",
-                    joinColumns = {@JoinColumn(name="GROUP_ROUTE_ID", referencedColumnName = "ID")},
-                    inverseJoinColumns = {@JoinColumn(name="USER_ID", referencedColumnName = "ID")}
+                    joinColumns = {@JoinColumn(name="GROUP_ROUTE_ID")},
+                    inverseJoinColumns = {@JoinColumn(name="USER_ID")}
             )
     private List<User> users;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Route.class, fetch = FetchType.EAGER)
     @JoinTable
             (
                     name="GROUP_ROUTE_ROUTE",
-                    joinColumns = {@JoinColumn(name="GROUP_ROUTE_ID", referencedColumnName = "ID")},
-                    inverseJoinColumns = {@JoinColumn(name="ROUTE_ID", referencedColumnName = "ID")}
+                    joinColumns = {@JoinColumn(name="GROUP_ROUTE_ID")},
+                    inverseJoinColumns = {@JoinColumn(name="ROUTE_ID")}
             )
     private List<Route> route;
     @OneToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name="CREATED_BY")
     private User createdBy;
     private Date createdDate;
     private double startPointLon;
@@ -41,6 +41,8 @@ public class GroupRoute {
     private double endPointLon;
     private double endPointLat;
     private Date startDate;
+    @Column
+    @ElementCollection(targetClass=Date.class)
     private List<Date> recurrentOn;
     private String channelId;
 
