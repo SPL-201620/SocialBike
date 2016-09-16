@@ -1,6 +1,6 @@
 package com.socialbike.be.routes;
 
-import com.socialbike.be.coordinates.AddCoordinateRequest;
+
 
 import java.util.Date;
 
@@ -9,23 +9,49 @@ import java.util.Date;
  */
 public class AddRouteRequest {
 
-    private AddCoordinateRequest startPoint;
-    private AddCoordinateRequest endPoint;
+    private long userId;
+    private double startPointLon;
+    private double startPointLat;
+    private double endPointLon;
+    private double endPointLat;
 
-    public AddCoordinateRequest getStartPoint() {
-        return startPoint;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setStartPoint(AddCoordinateRequest startPoint) {
-        this.startPoint = startPoint;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public AddCoordinateRequest getEndPoint() {
-        return endPoint;
+    public double getStartPointLon() {
+        return startPointLon;
     }
 
-    public void setEndPoint(AddCoordinateRequest endPoint) {
-        this.endPoint = endPoint;
+    public void setStartPointLon(double startPointLon) {
+        this.startPointLon = startPointLon;
     }
 
+    public double getStartPointLat() {
+        return startPointLat;
+    }
+
+    public void setStartPointLat(double startPointLat) {
+        this.startPointLat = startPointLat;
+    }
+
+    public double getEndPointLon() {
+        return endPointLon;
+    }
+
+    public void setEndPointLon(double endPointLon) {
+        this.endPointLon = endPointLon;
+    }
+
+    public double getEndPointLat() {
+        return endPointLat;
+    }
+
+    public void setEndPointLat(double endPointLat) {
+        this.endPointLat = endPointLat;
+    }
 }

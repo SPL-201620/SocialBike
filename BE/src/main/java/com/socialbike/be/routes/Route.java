@@ -1,11 +1,9 @@
 package com.socialbike.be.routes;
 
-import com.socialbike.be.coordinates.Coordinate;
 import com.socialbike.be.users.User;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by SAN on 12/09/2016.
@@ -15,16 +13,13 @@ public class Route {
     @Id
     @GeneratedValue
     private long id;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID")
     private User user;
-    @OneToOne
-    @JoinColumn(name = "startPointId")
-    private Coordinate startPoint;
-    @OneToOne
-    @JoinColumn(name = "endPointId")
-    private Coordinate endPoint;
-    @OneToMany
-    private List<Coordinate> pints;
+    private double startPointLon;
+    private double startPointLat;
+    private double endPointLon;
+    private double endPointLat;
     private Date startTime;
     private Date endTime;
     private double speed;
@@ -47,28 +42,36 @@ public class Route {
         this.user = user;
     }
 
-    public Coordinate getStartPoint() {
-        return startPoint;
+    public double getStartPointLon() {
+        return startPointLon;
     }
 
-    public void setStartPoint(Coordinate startPoint) {
-        this.startPoint = startPoint;
+    public void setStartPointLon(double startPointLon) {
+        this.startPointLon = startPointLon;
     }
 
-    public Coordinate getEndPoint() {
-        return endPoint;
+    public double getStartPointLat() {
+        return startPointLat;
     }
 
-    public void setEndPoint(Coordinate endPoint) {
-        this.endPoint = endPoint;
+    public void setStartPointLat(double startPointLat) {
+        this.startPointLat = startPointLat;
     }
 
-    public List<Coordinate> getPints() {
-        return pints;
+    public double getEndPointLon() {
+        return endPointLon;
     }
 
-    public void setPints(List<Coordinate> pints) {
-        this.pints = pints;
+    public void setEndPointLon(double endPointLon) {
+        this.endPointLon = endPointLon;
+    }
+
+    public double getEndPointLat() {
+        return endPointLat;
+    }
+
+    public void setEndPointLat(double endPointLat) {
+        this.endPointLat = endPointLat;
     }
 
     public Date getStartTime() {
