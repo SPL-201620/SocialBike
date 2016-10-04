@@ -29,7 +29,6 @@ export class HomePage {
 
   ngOnInit() {
     this.loadMap();
-    this.directionsDisplay.setMap(this.map);
     // get the two fields
     let input_from = (<HTMLInputElement>(document.getElementById("journey_from").getElementsByTagName('input')[0]));
     let input_to = (<HTMLInputElement>(document.getElementById("journey_to").getElementsByTagName('input')[0]));
@@ -81,6 +80,8 @@ export class HomePage {
       }
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+      this.directionsDisplay.setMap(this.map);
 
     }, (err) => {
       console.log(err);
