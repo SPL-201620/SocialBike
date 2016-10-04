@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>From</ion-label>
+      <ion-input (focus)="clearFrom()" id="journey_from" name="journey_from" type="text" placeholder="Enter location" [(ngModel)]="fromValue"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>To</ion-label>
+      <ion-input (focus)="clearTo()" id="journey_to" name="journey_to" type="text" placeholder="Enter location" [(ngModel)]="toValue"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div #map id="map"></div>
+</ion-content>
