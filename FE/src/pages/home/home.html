@@ -15,5 +15,8 @@
       <ion-input (focus)="clearTo()" id="journey_to" name="journey_to" type="text" placeholder="Enter location" [(ngModel)]="toValue"></ion-input>
     </ion-item>
   </ion-list>
+  <div padding>
+    <button block (click)="getDirections()">Get Directions</button>
+  </div>
   <div #map id="map"></div>
 </ion-content>
