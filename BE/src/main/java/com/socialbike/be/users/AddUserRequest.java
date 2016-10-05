@@ -5,6 +5,7 @@ package com.socialbike.be.users;
  */
 public class AddUserRequest {
 
+    private long id;
     private String firebaseId;
     private String email;
     private String password;
@@ -12,6 +13,14 @@ public class AddUserRequest {
     private String pictureUrl;
     private int age;
     private Sex sex;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getFirebaseId() {
         return firebaseId;
@@ -68,4 +77,5 @@ public class AddUserRequest {
     public void setSex(Sex sex) {
         this.sex = sex;
     }
+
 }

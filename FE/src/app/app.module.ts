@@ -1,3 +1,4 @@
+import {RoutesPage} from '../pages/routes/routes';
 import {RegisterPage} from '../pages/register/register';
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
@@ -16,7 +17,8 @@ import { LogInPage } from '../pages/login/login';
     HomePage,
     TabsPage,
     LogInPage,
-    RegisterPage
+    RegisterPage,
+    RoutesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -29,7 +31,8 @@ import { LogInPage } from '../pages/login/login';
     HomePage,
     TabsPage,
     LogInPage,
-    RegisterPage
+    RegisterPage,
+    RoutesPage
   ],
   providers: []
 })

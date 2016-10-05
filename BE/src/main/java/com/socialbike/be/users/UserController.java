@@ -1,9 +1,6 @@
 package com.socialbike.be.users;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,12 +18,12 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<User> findAllUsers(){
+    public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void addUser(@RequestBody AddUserRequest addUserRequest){
+    public void addUser(@RequestBody AddUserRequest addUserRequest) {
         User user = new User();
         user.setFirebaseId(addUserRequest.getFirebaseId());
         user.setAge(addUserRequest.getAge());
@@ -38,4 +35,16 @@ public class UserController {
         userRepository.save(user);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "/{userId}")
+    public void updateUser(@RequestBody AddUserRequest addUserRequest, @PathVariable("userId") long userId) {
+        User user = userRepository.findOne(userId);
+        user.setFirebaseId(addUserRequest.getFirebaseId());
+        user.setAge(addUserRequest.getAge());
+        user.setDisplayName(addUserRequest.getDisplayName());
+        user.setEmail(addUserRequest.getEmail());
+        user.setPassword(addUserRequest.getPassword());
+        user.setSex(addUserRequest.getSex());
+        user.setPictureUrl(addUserRequest.getPictureUrl());
+        userRepository.save(user);
+    }
 }

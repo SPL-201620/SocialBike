@@ -39,14 +39,9 @@ export class HomePage {
       componentRestrictions: {}
     };
 
-    // create the two autocompletes on the from and to fields
     let autocomplete1 = new google.maps.places.Autocomplete(input_from, options);
     let autocomplete2 = new google.maps.places.Autocomplete(input_to, options);
 
-    // we need to save a reference to this as we lose it in the callbacks
-    let self = this;
-
-    // add the first listener
     google.maps.event.addListener(autocomplete1, "place_changed", (): void => {
       let place = autocomplete1.getPlace();
       let geometry = place.geometry;
@@ -56,7 +51,6 @@ export class HomePage {
       }
     });
 
-    // add the second listener
     google.maps.event.addListener(autocomplete2, "place_changed", (): void => {
       let place = autocomplete2.getPlace();
       let geometry = place.geometry;
