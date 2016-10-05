@@ -19,6 +19,7 @@ export interface IUser {
 }
 
 export interface IGroupRoute {
+    id: number;
     createdById: number;
     users: number[];
     startPointLon: number;

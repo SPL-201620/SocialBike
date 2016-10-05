@@ -18,7 +18,7 @@ import { LogInPage } from '../pages/login/login';
     TabsPage,
     LogInPage,
     RegisterPage,
-    RoutesPage
+    RoutesPage,
   ],
   imports: [
     IonicModule.forRoot(MyApp)

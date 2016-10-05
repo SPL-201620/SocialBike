@@ -10,7 +10,7 @@ import { IUser } from '../shared/interfaces';
 @Injectable()
 export class UserService {
 
-    private url: string = 'users/';
+    private url: string = 'http://localhost:8080/users/';
 
     constructor(private http: Http) {
     }
@@ -20,6 +20,8 @@ export class UserService {
     }
 
     saveUser(user: IUser){
+        user.firebaseId = "testing";
+        user.pictureUrl = "testing";
         return this.http.post(this.url, user)
             .map((response: Response) => response.json())
             .catch(this.handleError);

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class RouteService {
 
-    private url: string = 'routes/';
+    private url: string = 'localhost:8080/routes/';
 
     constructor(private http: Http) {
     }
