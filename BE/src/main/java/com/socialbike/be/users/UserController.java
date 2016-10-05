@@ -1,5 +1,7 @@
 package com.socialbike.be.users;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +25,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void addUser(@RequestBody AddUserRequest addUserRequest) {
+    public ResponseEntity addUser(@RequestBody AddUserRequest addUserRequest) {
         User user = new User();
         user.setFirebaseId(addUserRequest.getFirebaseId());
         user.setAge(addUserRequest.getAge());
@@ -33,9 +35,11 @@ public class UserController {
         user.setSex(addUserRequest.getSex());
         user.setPictureUrl(addUserRequest.getPictureUrl());
         userRepository.save(user);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{userId}")
+    @ResponseStatus(value = HttpStatus.OK)
     public void updateUser(@RequestBody AddUserRequest addUserRequest, @PathVariable("userId") long userId) {
         User user = userRepository.findOne(userId);
         user.setFirebaseId(addUserRequest.getFirebaseId());

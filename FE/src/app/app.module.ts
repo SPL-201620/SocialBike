@@ -1,3 +1,5 @@
+import {RouteService} from '../services/route.service.';
+import {UserService} from '../../.tmp/services/user.service';
 import {RoutesPage} from '../pages/routes/routes';
 import {RegisterPage} from '../pages/register/register';
 import { NgModule } from '@angular/core';
@@ -34,6 +36,6 @@ import { LogInPage } from '../pages/login/login';
     RegisterPage,
     RoutesPage
   ],
-  providers: []
+  providers: [UserService, RouteService]
 })
 export class AppModule {}
