@@ -10,6 +10,14 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LogInPage } from '../pages/login/login';
+import { AngularFireModule } from 'angularfire2';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyCf9dVvBne3UGKsyK4U4Z62fnKezfeCfkU",
+  authDomain: "socialbike-145413.firebaseapp.com",
+  databaseURL: "https://socialbike-145413.firebaseio.com",
+  storageBucket: "socialbike-145413.appspot.com"
+};
 
 @NgModule({
   declarations: [
@@ -23,7 +31,8 @@ import { LogInPage } from '../pages/login/login';
     RoutesPage,
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

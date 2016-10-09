@@ -141,4 +141,18 @@ export class HomePage {
       });
     }
   }
+
+  getCurrentLocation() {
+    Geolocation.getCurrentPosition().then((position) => {
+      let latLng = { lat: position.coords.latitude, lng: position.coords.longitude };
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: this.map,
+        title: 'Hello World!'
+      });
+      this.fromPlace = latLng;
+      this.fromValue = "Current Location";
+      this.map.setCenter(latLng);
+    });
+  }
 }

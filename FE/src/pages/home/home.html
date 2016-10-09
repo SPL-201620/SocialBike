@@ -9,7 +9,9 @@
     <ion-item>
       <ion-label>From</ion-label>
       <ion-input (focus)="clearFrom()" id="journey_from" name="journey_from" type="text" placeholder="Enter location" [(ngModel)]="fromValue"></ion-input>
+      <button item-right (click)="getCurrentLocation()"><ion-icon name="locate"></ion-icon></button>
     </ion-item>
+    
     <ion-item>
       <ion-label>To</ion-label>
       <ion-input (focus)="clearTo()" id="journey_to" name="journey_to" type="text" placeholder="Enter location" [(ngModel)]="toValue"></ion-input>

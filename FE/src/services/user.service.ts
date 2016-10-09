@@ -8,12 +8,14 @@ import { Observable } from 'rxjs/Rx';
 
 import { IUser } from '../shared/interfaces';
 
+import { AngularFire } from 'angularfire2';
+
 @Injectable()
 export class UserService {
 
     private url: string = 'http://localhost:8080/users/';
 
-    constructor(private http: Http) {
+    constructor(private http: Http, public af: AngularFire) {
     }
 
     logUserIn(email: string, password: string) {
@@ -23,13 +25,26 @@ export class UserService {
             .catch(this.handleError);
     }
 
+    loginFirebaseAuth(email: string, password: string) {
+        var creds: any = { email: email, password: password };
+        var res: Promise<boolean> = new Promise((resolve, reject) => {
+            this.af.auth.login(creds).then(result => {
+                resolve(result);
+            })
+        });
+        return res;
+    }
+
     getUser(userId: number): Observable<IUser> {
         return this.http.get(this.url).map(this.extractData);
     }
 
+    saveUserFirebase(email: string, password: string) {
+        var creds: any = { email: email, password: password };
+        return this.af.auth.createUser(creds);
+    }
+
     saveUser(user: IUser) {
-        user.firebaseId = "testing";
-        user.pictureUrl = "testing";
         return this.http.post(this.url, user)
             .map(this.extractData)
             .catch(this.handleError);

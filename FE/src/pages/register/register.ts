@@ -23,14 +23,17 @@ export class RegisterPage {
 
     registerUser(): void {
         this.user = new User(-1, "testing", this.email, this.password, this.displayName, "testing", this.age, this.sex);
-
-        this.userService.saveUser(this.user).subscribe((status: boolean) => {
-            if (status) {
-                this.showAlert("Registration Success!", "Please login to the application with your email and password.");
-                this.navCtrl.pop();
-            } else {
-                console.log("There is a problem saving the user.");
-            }
+        this.userService.saveUserFirebase(this.user.email, this.user.password).then((result: any) => {
+            this.user.firebaseId = result.uid;
+            this.user.pictureUrl = "";
+            this.userService.saveUser(this.user).subscribe((status: boolean) => {
+                if (status) {
+                    this.showAlert("Registration Success!", "Please login to the application with your email and password.");
+                    this.navCtrl.pop();
+                } else {
+                    console.log("There is a problem saving the user.");
+                }
+            });
         });
     }
 
