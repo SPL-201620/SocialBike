@@ -26,16 +26,21 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity addUser(@RequestBody AddUserRequest addUserRequest) {
-        User user = new User();
-        user.setFirebaseId(addUserRequest.getFirebaseId());
-        user.setAge(addUserRequest.getAge());
-        user.setDisplayName(addUserRequest.getDisplayName());
-        user.setEmail(addUserRequest.getEmail());
-        user.setPassword(addUserRequest.getPassword());
-        user.setSex(addUserRequest.getSex());
-        user.setPictureUrl(addUserRequest.getPictureUrl());
-        userRepository.save(user);
-        return new ResponseEntity(HttpStatus.OK);
+        List<User> users = userRepository.findByEmail(addUserRequest.getEmail());
+        if(users.size() == 0) {
+            User user = new User();
+            user.setFirebaseId(addUserRequest.getFirebaseId());
+            user.setAge(addUserRequest.getAge());
+            user.setDisplayName(addUserRequest.getDisplayName());
+            user.setEmail(addUserRequest.getEmail());
+            user.setPassword(addUserRequest.getPassword());
+            user.setSex(addUserRequest.getSex());
+            user.setPictureUrl(addUserRequest.getPictureUrl());
+            userRepository.save(user);
+            return new ResponseEntity(HttpStatus.OK);
+        }else{
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{userId}")
@@ -50,5 +55,20 @@ public class UserController {
         user.setSex(addUserRequest.getSex());
         user.setPictureUrl(addUserRequest.getPictureUrl());
         userRepository.save(user);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/login")
+    public ResponseEntity logUserIn(@RequestBody UserLoginRequest userLoginRequest){
+        List<User> users = userRepository.findByEmail(userLoginRequest.getEmail());
+        if(users.size() > 0){
+            User user = users.get(0);
+            if(user.getPassword().equals(userLoginRequest.getPassword())){
+                return new ResponseEntity(HttpStatus.OK);
+            }else{
+                return new ResponseEntity(HttpStatus.FORBIDDEN);
+            }
+        }else{
+            return new ResponseEntity(HttpStatus.FORBIDDEN);
+        }
     }
 }

@@ -18,6 +18,11 @@ export interface IUser {
     sex: string;
 }
 
+export interface IUserLogin{
+    email: string,
+    password: string
+}
+
 export interface IGroupRoute {
     id: number;
     createdById: number;

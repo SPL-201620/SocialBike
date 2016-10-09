@@ -1,4 +1,4 @@
-import {IGroupRoute, IUser} from './interfaces';
+import {IGroupRoute, IRoute, IUser, IUserLogin} from './interfaces';
 
 export class User implements IUser{
 
@@ -11,6 +11,13 @@ export class User implements IUser{
         this.pictureUrl = pictureUrl;
         this.age = age;
         this.sex = sex;
+    }
+}
+
+export class UserLogin implements IUserLogin{
+    constructor(public email: string, public password: string){
+        this.email = email;
+        this.password = password;
     }
 }
 

@@ -1,3 +1,4 @@
+import { User, UserLogin } from '../shared/classes';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
@@ -15,8 +16,15 @@ export class UserService {
     constructor(private http: Http) {
     }
 
+    logUserIn(email: string, password: string) {
+        let userLogin = new UserLogin(email, password);
+        return this.http.post(this.url + "login/", userLogin)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
     getUser(userId: number): Observable<IUser> {
-        return this.http.get(this.url).map(this.extractData).catch(this.handleError);
+        return this.http.get(this.url).map(this.extractData);
     }
 
     saveUser(user: IUser) {
@@ -35,7 +43,7 @@ export class UserService {
 
     handleError(error: any): any {
         console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error || 'Server error');
     }
 
     private extractData(res: Response) {
