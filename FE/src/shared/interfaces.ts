@@ -5,6 +5,12 @@ export interface IRoute {
     startPointLat: number;
     endPointLon: number;
     endPointLat: number;
+    startTime: Date;
+    endTime: Date;
+    speed: number;
+    calories: number;
+    distance: number;
+    finished: boolean;
 }
 
 export interface IUser {

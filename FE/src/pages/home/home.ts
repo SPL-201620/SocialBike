@@ -1,7 +1,11 @@
+import { RoutesPage } from '../routes/routes';
+import { Route } from '../../shared/classes';
+import { RouteService } from '../../services/route.service.';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
+import { Storage } from '@ionic/storage'
 
 declare var google;
 
@@ -19,10 +23,23 @@ export class HomePage {
   toPlace: any;
   directionsService: any;
   directionsDisplay: any;
+  markers: any[];
+  hideRouteInfo: boolean;
+  routeInfo: any;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public routeService: RouteService, public storage: Storage, public alertCtrl: AlertController) {
+    this.routeInfo = {
+      timeText: "",
+      timeValue: 0,
+      distanceText: "",
+      distanceValue: 0,
+      caloriesText: "",
+      caloriesValue: 0,
+    }
     this.fromValue = "";
     this.toValue = "";
+    this.markers = new Array();
+    this.hideRouteInfo = true;
     this.directionsService = new google.maps.DirectionsService;
     this.directionsDisplay = new google.maps.DirectionsRenderer;
   }
@@ -103,13 +120,13 @@ export class HomePage {
       map: this.map,
       anchorPoint: new google.maps.Point(0, -29)
     });
-    marker.setIcon(/** @type {google.maps.Icon} */({
-      url: place.icon,
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(35, 35)
-    }));
+    // marker.setIcon(/** @type {google.maps.Icon} */({
+    //   url: place.icon,
+    //   size: new google.maps.Size(71, 71),
+    //   origin: new google.maps.Point(0, 0),
+    //   anchor: new google.maps.Point(17, 34),
+    //   scaledSize: new google.maps.Size(35, 35)
+    // }));
     marker.setPosition(place.geometry.location);
     marker.setVisible(true);
 
@@ -124,16 +141,24 @@ export class HomePage {
 
     infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
     infowindow.open(this.map, marker);
+    this.markers.push(marker);
   }
 
   getDirections() {
     if (this.fromPlace && this.toPlace) {
+      this.markers.forEach((value: any, index: number, array: any[]) => {
+        value.setMap(null);
+      });
+      this.markers = new Array();
       this.directionsService.route({
         origin: this.fromPlace,
         destination: this.toPlace,
         travelMode: 'DRIVING'
       }, (response, status): void => {
         if (status === 'OK') {
+          this.hideRouteInfo = false;
+          console.log(response);
+          this.setCurrentRoutInfo(response.routes[0].legs[0]);
           this.directionsDisplay.setDirections(response);
         } else {
           console.log('Directions request failed due to ' + status);
@@ -148,11 +173,76 @@ export class HomePage {
       var marker = new google.maps.Marker({
         position: latLng,
         map: this.map,
-        title: 'Hello World!'
+        title: 'My Location'
       });
       this.fromPlace = latLng;
       this.fromValue = "Current Location";
       this.map.setCenter(latLng);
     });
+  }
+
+  setCurrentRoutInfo(routeInfo: any) {
+    this.routeInfo.timeText = routeInfo.duration.text;
+    this.routeInfo.timeValue = routeInfo.duration.value;
+    this.routeInfo.distanceText = routeInfo.distance.text;
+    this.routeInfo.distanceValue = routeInfo.distance.value;
+    let calories = this.getCurrentRouteCalories(this.routeInfo.timeValue, this.routeInfo.distanceValue);
+    this.routeInfo.caloriesText = calories.text;
+    this.routeInfo.caloriesValue = calories.value;
+  }
+
+  getCurrentRouteCalories(time: number, distance: number): any {
+    time = (time / 60) / 60;
+    distance = distance / 1000;
+    let vel = (distance * 0.63) / time;
+    let kalHour = 0;
+    if (vel < 12) {
+      kalHour = 463;
+    } else if (vel >= 12 && vel < 14) {
+      kalHour = 563;
+    } else if (vel >= 14 && vel < 16) {
+      kalHour = 704;
+    } else if (vel >= 16 && vel < 19) {
+      kalHour = 844;
+    } else {
+      kalHour = 1126;
+    }
+    let totalKal = kalHour * time;
+    let calories = {
+      text: Math.floor(totalKal) + " Cal",
+      value: totalKal
+    };
+    return calories;
+  }
+
+  startRoute() {
+    this.storage.get("userDBId").then((value) => {
+      let route = new Route();
+      route.calories = this.routeInfo.caloriesValue;
+      route.distance = this.routeInfo.distanceValue;
+      route.speed = (this.routeInfo.distance / 1000) / ((this.routeInfo.timeValue / 60) / 60);
+      route.startTime = new Date(Date.now());
+      route.endTime = new Date(Date.now());
+      route.endTime.setSeconds(route.startTime.getSeconds() + this.routeInfo.timeValue);
+      route.userId = value;
+      route.startPointLat = this.fromPlace.lat;
+      route.startPointLon = this.fromPlace.lng;
+      route.endPointLat = this.toPlace.lat;
+      route.endPointLon = this.toPlace.lng;
+      route.finished = false;
+      this.routeService.saveRoute(route).subscribe((res) => {
+        this.showAlert("Success", "Started new route, check and end routes in your routes page.")
+        this.navCtrl.push(RoutesPage);
+      });
+    })
+  }
+
+  showAlert(title: string, subTitle: string) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      subTitle: subTitle,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

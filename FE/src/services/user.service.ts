@@ -28,7 +28,8 @@ export class UserService {
     loginFirebaseAuth(email: string, password: string) {
         var creds: any = { email: email, password: password };
         var res: Promise<boolean> = new Promise((resolve, reject) => {
-            this.af.auth.login(creds).then(result => {
+            this.af.auth.login(creds, 4).then(result => {
+                console.log(result);
                 resolve(result);
             })
         });
@@ -37,6 +38,10 @@ export class UserService {
 
     getUser(userId: number): Observable<IUser> {
         return this.http.get(this.url).map(this.extractData);
+    }
+
+    getUserByFirebaseId(userId: number): Observable<IUser> {
+        return this.http.get(this.url + "/findUserByFirebaseId/" + userId).map(this.extractData);
     }
 
     saveUserFirebase(email: string, password: string) {

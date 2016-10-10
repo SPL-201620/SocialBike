@@ -11,14 +11,30 @@
       <ion-input (focus)="clearFrom()" id="journey_from" name="journey_from" type="text" placeholder="Enter location" [(ngModel)]="fromValue"></ion-input>
       <button item-right (click)="getCurrentLocation()"><ion-icon name="locate"></ion-icon></button>
     </ion-item>
-    
+
     <ion-item>
       <ion-label>To</ion-label>
       <ion-input (focus)="clearTo()" id="journey_to" name="journey_to" type="text" placeholder="Enter location" [(ngModel)]="toValue"></ion-input>
     </ion-item>
   </ion-list>
   <div padding>
-    <button block (click)="getDirections()">Get Directions</button>
+    <button ion-button block (click)="getDirections()">Get Directions</button>
   </div>
   <div #map id="map"></div>
+  <ion-card [hidden]="hideRouteInfo" >
+    <ion-card-header>
+      Your trip Info
+    </ion-card-header>
+
+    <ion-item>
+      <span item-left>{{routeInfo.timeText}}</span>
+      <span item-left>({{routeInfo.distanceText}})</span>
+      <span item-left>({{routeInfo.caloriesText}})</span>
+    </ion-item>
+    <ion-item>
+      <button ion-button secondary block (click)="startRoute()">
+          Start
+        </button>
+    </ion-item>
+  </ion-card>
 </ion-content>

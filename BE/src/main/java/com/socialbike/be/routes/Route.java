@@ -25,6 +25,7 @@ public class Route {
     private double speed;
     private double calories;
     private double distance;
+    private boolean finished;
 
     public long getId() {
         return id;
@@ -112,5 +113,13 @@ public class Route {
 
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 }

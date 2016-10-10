@@ -1,5 +1,6 @@
 package com.socialbike.be.users;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,15 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/findUserByFirebaseId/{userId}")
+    public ResponseEntity findUserByFirebaseId(@PathVariable("userId") String userId) {
+        List<User> users = userRepository.findByFirebaseId(userId);
+        if(users.size() > 0)
+            return new ResponseEntity(users.get(0), HttpStatus.OK);
+        else
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(method = RequestMethod.POST)

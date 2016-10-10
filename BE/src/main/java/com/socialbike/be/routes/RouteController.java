@@ -1,8 +1,11 @@
 package com.socialbike.be.routes;
 
+import com.socialbike.be.users.User;
 import com.socialbike.be.users.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,9 +23,19 @@ public class RouteController {
         this.userRepository =  userRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value="/{userId}")
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Route> getRoutes(){
+        return routeRepository.findAll();
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/routeId}")
+    public Route getRouteById(@PathVariable long routeId){
+        return routeRepository.getOne(routeId);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/ByUserId/{userId}")
     public List<Route> getAllUserRoutes(@PathVariable long userId){
-        return null;
+        return routeRepository.findByUserId(userId);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -34,7 +47,22 @@ public class RouteController {
         route.setStartPointLat(addRouteRequest.getStartPointLat());
         route.setEndPointLon(addRouteRequest.getEndPointLon());
         route.setEndPointLat(addRouteRequest.getEndPointLat());
+        route.setCalories(addRouteRequest.getCalories());
+        route.setSpeed(addRouteRequest.getSpeed());
+        route.setDistance(addRouteRequest.getDistance());
+        route.setStartTime(addRouteRequest.getStartTime());
+        route.setEndTime(addRouteRequest.getEndTime());
+        route.setFinished(addRouteRequest.isFinished());
 
         routeRepository.save(route);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/{routeId}")
+    public List<Route> updateUser(@RequestBody AddRouteRequest addRouteRequest, @PathVariable("routeId") long routeId) {
+        Route route = routeRepository.findOne(routeId);
+        route.setFinished(addRouteRequest.isFinished());
+        route.setEndTime(addRouteRequest.getEndTime());
+        routeRepository.save(route);
+        return routeRepository.findByUserId(route.getUser().getId());
     }
 }

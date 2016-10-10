@@ -1,4 +1,4 @@
-import {IRoute} from '../shared/interfaces';
+import { IRoute } from '../shared/interfaces';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
@@ -9,29 +9,43 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class RouteService {
 
-    private url: string = 'localhost:8080/routes/';
+    private url: string = 'http://localhost:8080/routes/';
 
     constructor(private http: Http) {
     }
 
-    getRoute(routerId: number): Observable<IRoute[]> {
-        return this.http.get(this.url + routerId).map((resp: Response) => resp.json()).catch(this.handleError);
+    getRoute(routeId: number): Observable<IRoute> {
+        return this.http.get(this.url + "/" + routeId).map(this.extractData);
     }
 
-    saveRoute(route: IRoute){
+    getRoutesByUserId(userId: number): Observable<IRoute[]> {
+        return this.http.get(this.url + "/ByUserId/" + userId).map(this.extractData);
+    }
+
+    saveRoute(route: IRoute) {
         return this.http.post(this.url, route)
-            .map((response: Response) => response.json())
+            .map(this.extractData)
             .catch(this.handleError);
     }
 
-    updateRoute(route: IRoute) {
+    updateRoute(route: IRoute) : Observable<IRoute[]>{
         return this.http.put(this.url + route.id, route)
-            .map((response: Response) => response.json())
-            .catch(this.handleError);
+            .map(this.extractData);
     }
 
     handleError(error: any): any {
         console.error(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error || 'Server error');
+    }
+
+    private extractData(res: Response) {
+        let body;
+
+        // check if empty, before call json
+        if (res.text()) {
+            body = res.json();
+        }
+
+        return body || {};
     }
 }

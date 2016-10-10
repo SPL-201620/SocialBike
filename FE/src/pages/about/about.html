@@ -7,5 +7,27 @@
 </ion-header>
 
 <ion-content padding>
-
+  <ion-list inset>
+    <ion-item>
+      {{email}}
+    </ion-item>
+    <ion-item>
+      <ion-label>Display Name</ion-label>
+      <ion-input [(ngModel)]="displayName" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Age</ion-label>
+      <ion-input [(ngModel)]="age" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select [(ngModel)]="sex">
+        <ion-option value="Male" selected="true">Male</ion-option>
+        <ion-option value="Female">Female</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button block (click)="saveUserChanges()">Save Changes</button>
+  </div>
 </ion-content>
