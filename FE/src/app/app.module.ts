@@ -1,4 +1,7 @@
+import { ChatPage } from '../pages/contact/chat';
+import { ChatService } from '../services/chats.service';
 import { RoutesPage } from '../pages/routes/routes';
+import { ContactPage } from '../pages/contact/contact';
 import { RouteService } from '../services/route.service.';
 import { UserService } from '../services/user.service';
 import { RegisterPage } from '../pages/register/register';
@@ -6,7 +9,6 @@ import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LogInPage } from '../pages/login/login';
@@ -34,7 +36,8 @@ const myFirebaseAuthConfig = {
     TabsPage,
     LogInPage,
     RegisterPage,
-    RoutesPage
+    RoutesPage,
+    ChatPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -49,8 +52,9 @@ const myFirebaseAuthConfig = {
     TabsPage,
     LogInPage,
     RegisterPage,
-    RoutesPage
+    RoutesPage,
+    ChatPage
   ],
-  providers: [UserService, RouteService, Storage]
+  providers: [UserService, RouteService, ChatService, Storage]
 })
 export class AppModule { }

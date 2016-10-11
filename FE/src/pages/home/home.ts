@@ -21,6 +21,8 @@ export class HomePage {
   toValue: string;
   fromPlace: any;
   toPlace: any;
+  fromAddress: string;
+  toAddress: string;
   directionsService: any;
   directionsDisplay: any;
   markers: any[];
@@ -35,6 +37,8 @@ export class HomePage {
       distanceValue: 0,
       caloriesText: "",
       caloriesValue: 0,
+      fromAddress: "",
+      toAddress: ""
     }
     this.fromValue = "";
     this.toValue = "";
@@ -189,6 +193,8 @@ export class HomePage {
     let calories = this.getCurrentRouteCalories(this.routeInfo.timeValue, this.routeInfo.distanceValue);
     this.routeInfo.caloriesText = calories.text;
     this.routeInfo.caloriesValue = calories.value;
+    this.routeInfo.fromAddress = routeInfo.start_address;
+    this.routeInfo.toAddress = routeInfo.end_address;
   }
 
   getCurrentRouteCalories(time: number, distance: number): any {
@@ -227,8 +233,10 @@ export class HomePage {
       route.userId = value;
       route.startPointLat = this.fromPlace.lat;
       route.startPointLon = this.fromPlace.lng;
+      route.startPointName = this.routeInfo.fromAddress;
       route.endPointLat = this.toPlace.lat;
       route.endPointLon = this.toPlace.lng;
+      route.endPointName = this.routeInfo.toAddress;
       route.finished = false;
       this.routeService.saveRoute(route).subscribe((res) => {
         this.showAlert("Success", "Started new route, check and end routes in your routes page.")

@@ -1,8 +1,10 @@
 export interface IRoute {
     id: number,
     userId: number;
+    startPointName: string;
     startPointLon: number;
     startPointLat: number;
+    endPointName: string;
     endPointLon: number;
     endPointLat: number;
     startTime: Date;

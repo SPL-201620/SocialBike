@@ -27,8 +27,10 @@ export class Route implements IRoute {
     public userId: number;
     public startPointLon: number;
     public startPointLat: number;
+    public startPointName: string;
     public endPointLon: number;
     public endPointLat: number;
+    public endPointName: string;
     public startTime: Date;
     public endTime: Date;
     public speed: number;

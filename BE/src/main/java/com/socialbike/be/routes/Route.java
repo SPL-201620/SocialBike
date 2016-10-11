@@ -18,8 +18,10 @@ public class Route {
     private User user;
     private double startPointLon;
     private double startPointLat;
+    private String startPointName;
     private double endPointLon;
     private double endPointLat;
+    private String endPointName;
     private Date startTime;
     private Date endTime;
     private double speed;
@@ -121,5 +123,21 @@ public class Route {
 
     public void setFinished(boolean finished) {
         this.finished = finished;
+    }
+
+    public String getStartPointName() {
+        return startPointName;
+    }
+
+    public void setStartPointName(String startPointName) {
+        this.startPointName = startPointName;
+    }
+
+    public String getEndPointName() {
+        return endPointName;
+    }
+
+    public void setEndPointName(String endPointName) {
+        this.endPointName = endPointName;
     }
 }

@@ -10,12 +10,28 @@ import { IUser } from '../shared/interfaces';
 
 import { AngularFire } from 'angularfire2';
 
+import { Storage } from '@ionic/storage';
+
 @Injectable()
 export class UserService {
 
     private url: string = 'http://localhost:8080/users/';
 
-    constructor(private http: Http, public af: AngularFire) {
+    constructor(private http: Http, public af: AngularFire, public storage: Storage) {
+    }
+
+    getCurrentFirebaseUserId() {
+        return this.storage.get('userId')
+            .then(value => {
+                return value;
+            });
+    }
+
+    getCurrentDBUserId() {
+        return this.storage.get('userDBId')
+            .then(value => {
+                return value;
+            });
     }
 
     logUserIn(email: string, password: string) {
@@ -36,8 +52,12 @@ export class UserService {
         return res;
     }
 
-    getUser(userId: number): Observable<IUser> {
+    getAllUsers(): Observable<IUser[]> {
         return this.http.get(this.url).map(this.extractData);
+    }
+
+    getUser(userId: number): Observable<IUser> {
+        return this.http.get(this.url + "/" + userId).map(this.extractData);
     }
 
     getUserByFirebaseId(userId: number): Observable<IUser> {
