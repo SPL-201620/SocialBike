@@ -16,7 +16,7 @@
 						{{user.displayName}}
 					</ion-card-header>
 					<ion-card-content>
-						<button ion-button color="secondary" icon-left>
+						<button *ngIf="!isMyFriend(user.firebaseId)" ion-button color="secondary" icon-left (click)="addFriend(user.firebaseId)">
 							<ion-icon name='people'></ion-icon>
 							Friends
 						</button>

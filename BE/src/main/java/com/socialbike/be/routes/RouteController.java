@@ -63,8 +63,8 @@ public class RouteController {
     @RequestMapping(method = RequestMethod.PUT, value = "/{routeId}")
     public List<Route> updateUser(@RequestBody AddRouteRequest addRouteRequest, @PathVariable("routeId") long routeId) {
         Route route = routeRepository.findOne(routeId);
-        long duration = (addRouteRequest.getEndTime().getTime() - addRouteRequest.getStartTime().getTime());
-        duration = TimeUnit.MILLISECONDS.toHours(duration);
+        long milliseconds = (addRouteRequest.getEndTime().getTime() - addRouteRequest.getStartTime().getTime());
+        long duration = TimeUnit.MILLISECONDS.toHours(milliseconds);
         double speed = (route.getDistance()/1000) / duration;
         route.setFinished(addRouteRequest.isFinished());
         route.setEndTime(addRouteRequest.getEndTime());

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { IUser } from '../shared/interfaces';
 
-import { AngularFire } from 'angularfire2';
+import { AngularFire, FirebaseRef } from 'angularfire2';
 
 import { Storage } from '@ionic/storage';
 
@@ -84,6 +84,18 @@ export class UserService {
     handleError(error: any): any {
         console.error(error);
         return Observable.throw(error || 'Server error');
+    }
+
+    addUserFriend(uid:string, friendUid: string){
+        let endpoint = this.af.database.object(`/users/${uid}/friends/${friendUid}`);
+        endpoint.set(true);
+    }
+
+    getUserFriends() : any{
+        return this.getCurrentFirebaseUserId().then(uid => {
+            let friends = this.af.database.list(`/users/${uid}/friends`);
+            return friends;
+        });
     }
 
     private extractData(res: Response) {
