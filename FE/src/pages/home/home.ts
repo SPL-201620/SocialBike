@@ -1,9 +1,10 @@
+import {NewGroupRoutePage} from '../group/newgroup';
 import { RoutesPage } from '../routes/routes';
 import { Route } from '../../shared/classes';
 import { RouteService } from '../../services/route.service.';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ModalController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { Storage } from '@ionic/storage'
 
@@ -29,7 +30,7 @@ export class HomePage {
   hideRouteInfo: boolean;
   routeInfo: any;
 
-  constructor(public navCtrl: NavController, public routeService: RouteService, public storage: Storage, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public routeService: RouteService, public storage: Storage, public alertCtrl: AlertController,  public modalCtrl: ModalController) {
     this.routeInfo = {
       timeText: "",
       timeValue: 0,
@@ -242,6 +243,28 @@ export class HomePage {
         this.showAlert("Success", "Started new route, check and end routes in your routes page.")
         this.navCtrl.push(RoutesPage);
       });
+    })
+  }
+
+  groupRoute() {
+    this.storage.get("userDBId").then((value) => {
+      let route = new Route();
+      route.calories = this.routeInfo.caloriesValue;
+      route.distance = this.routeInfo.distanceValue;
+      route.speed = (this.routeInfo.distance / 1000) / ((this.routeInfo.timeValue / 60) / 60);
+      route.startTime = new Date(Date.now());
+      route.endTime = new Date(Date.now());
+      route.endTime.setSeconds(route.startTime.getSeconds() + this.routeInfo.timeValue);
+      route.userId = value;
+      route.startPointLat = this.fromPlace.lat;
+      route.startPointLon = this.fromPlace.lng;
+      route.startPointName = this.routeInfo.fromAddress;
+      route.endPointLat = this.toPlace.lat;
+      route.endPointLon = this.toPlace.lng;
+      route.endPointName = this.routeInfo.toAddress;
+      route.finished = false;
+      let modal = this.modalCtrl.create(NewGroupRoutePage, route);
+      modal.present();
     })
   }
 

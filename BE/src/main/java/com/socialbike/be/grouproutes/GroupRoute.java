@@ -16,6 +16,7 @@ public class GroupRoute {
     @Id
     @GeneratedValue
     private long id;
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinTable
             (
@@ -24,27 +25,22 @@ public class GroupRoute {
                     inverseJoinColumns = {@JoinColumn(name="USER_ID")}
             )
     private List<User> users;
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Route.class, fetch = FetchType.EAGER)
-    @JoinTable
-            (
-                    name="GROUP_ROUTE_ROUTE",
-                    joinColumns = {@JoinColumn(name="GROUP_ROUTE_ID")},
-                    inverseJoinColumns = {@JoinColumn(name="ROUTE_ID")}
-            )
-    private List<Route> route;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="ROUTE_ID")
+    private Route route;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="CREATED_BY")
     private User createdBy;
     private Date createdDate;
-    private double startPointLon;
-    private double startPointLat;
-    private double endPointLon;
-    private double endPointLat;
     private Date startDate;
-    @Column
-    @ElementCollection(targetClass=Date.class)
-    private List<Date> recurrentOn;
-    private String channelId;
+    private boolean recurrent;
+    private boolean monday;
+    private boolean tuesday;
+    private boolean wednesday;
+    private boolean thursday;
+    private boolean friday;
+    private boolean saturday;
+    private boolean sunday;
 
     public long getId() {
         return id;
@@ -52,6 +48,14 @@ public class GroupRoute {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<User> getUsers() {
@@ -62,11 +66,11 @@ public class GroupRoute {
         this.users = users;
     }
 
-    public List<Route> getRoute() {
+    public Route getRoute() {
         return route;
     }
 
-    public void setRoute(List<Route> route) {
+    public void setRoute(Route route) {
         this.route = route;
     }
 
@@ -86,38 +90,6 @@ public class GroupRoute {
         this.createdDate = createdDate;
     }
 
-    public double getStartPointLon() {
-        return startPointLon;
-    }
-
-    public void setStartPointLon(double startPointLon) {
-        this.startPointLon = startPointLon;
-    }
-
-    public double getStartPointLat() {
-        return startPointLat;
-    }
-
-    public void setStartPointLat(double startPointLat) {
-        this.startPointLat = startPointLat;
-    }
-
-    public double getEndPointLon() {
-        return endPointLon;
-    }
-
-    public void setEndPointLon(double endPointLon) {
-        this.endPointLon = endPointLon;
-    }
-
-    public double getEndPointLat() {
-        return endPointLat;
-    }
-
-    public void setEndPointLat(double endPointLat) {
-        this.endPointLat = endPointLat;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -126,19 +98,67 @@ public class GroupRoute {
         this.startDate = startDate;
     }
 
-    public List<Date> getRecurrentOn() {
-        return recurrentOn;
+    public boolean isRecurrent() {
+        return recurrent;
     }
 
-    public void setRecurrentOn(List<Date> recurrentOn) {
-        this.recurrentOn = recurrentOn;
+    public void setRecurrent(boolean recurrent) {
+        this.recurrent = recurrent;
     }
 
-    public String getChannelId() {
-        return channelId;
+    public boolean isMonday() {
+        return monday;
     }
 
-    public void setChannelId(String channelId) {
-        this.channelId = channelId;
+    public void setMonday(boolean monday) {
+        this.monday = monday;
+    }
+
+    public boolean isTuesday() {
+        return tuesday;
+    }
+
+    public void setTuesday(boolean tuesday) {
+        this.tuesday = tuesday;
+    }
+
+    public boolean isWednesday() {
+        return wednesday;
+    }
+
+    public void setWednesday(boolean wednesday) {
+        this.wednesday = wednesday;
+    }
+
+    public boolean isThursday() {
+        return thursday;
+    }
+
+    public void setThursday(boolean thursday) {
+        this.thursday = thursday;
+    }
+
+    public boolean isFriday() {
+        return friday;
+    }
+
+    public void setFriday(boolean friday) {
+        this.friday = friday;
+    }
+
+    public boolean isSaturday() {
+        return saturday;
+    }
+
+    public void setSaturday(boolean saturday) {
+        this.saturday = saturday;
+    }
+
+    public boolean isSunday() {
+        return sunday;
+    }
+
+    public void setSunday(boolean sunday) {
+        this.sunday = sunday;
     }
 }

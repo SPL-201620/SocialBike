@@ -1,0 +1,35 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Group Routes</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<ion-list>
+		<ion-list-header>Routes near you</ion-list-header>
+		<div *ngFor="let route of groupRoutes">
+			<ion-card>
+				<ion-card-header>
+					{{route.name}}
+				</ion-card-header>
+				<ion-card-content>
+					Start Date: {{ route.startDate }}
+					<div *ngIf="route.recurrent">
+						<ion-badge *ngIf="route.monday">Monday</ion-badge>
+						<ion-badge *ngIf="route.tuesday">Tuesday</ion-badge>
+						<ion-badge *ngIf="route.wednesday">Wednesday</ion-badge>
+						<ion-badge *ngIf="route.thursday">Thursday</ion-badge>
+						<ion-badge *ngIf="route.friday">Friday</ion-badge>
+						<ion-badge *ngIf="route.saturday">Saturday</ion-badge>
+						<ion-badge *ngIf="route.sunday">Sunday</ion-badge>
+					</div>
+					<ion-item>
+						Users in this route:
+						<ion-badge item-right>{{ route.users.length }}</ion-badge>
+					</ion-item>
+					<button *ngIf="notInRoute(route.users)" ion-button (click)="joinGroup(route.id)">Join Route</button>
+				</ion-card-content>
+			</ion-card>
+		</div>
+	</ion-list>
+</ion-content>

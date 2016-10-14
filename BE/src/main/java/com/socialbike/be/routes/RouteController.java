@@ -40,7 +40,7 @@ public class RouteController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void addRoute(@RequestBody AddRouteRequest addRouteRequest){
+    public Route addRoute(@RequestBody AddRouteRequest addRouteRequest){
         Route route = new Route();
 
         route.setUser(userRepository.findOne(addRouteRequest.getUserId()));
@@ -57,7 +57,7 @@ public class RouteController {
         route.setEndTime(addRouteRequest.getEndTime());
         route.setFinished(addRouteRequest.isFinished());
 
-        routeRepository.save(route);
+        return routeRepository.save(route);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{routeId}")

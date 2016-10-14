@@ -1,5 +1,7 @@
 package com.socialbike.be.grouproutes;
 
+import com.socialbike.be.routes.Route;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,13 +11,18 @@ import java.util.List;
 public class AddGroupRouteRequest {
 
     private long createdById;
+    private String name;
     private List<Long> users;
-    private double startPointLon;
-    private double startPointLat;
-    private double endPointLon;
-    private double endPointLat;
-    private List<Date> recurrentOn;
-    private String channelId;
+    private Route route;
+    private Date startDate;
+    private boolean recurrent;
+    private boolean monday;
+    private boolean tuesday;
+    private boolean wednesday;
+    private boolean thursday;
+    private boolean friday;
+    private boolean saturday;
+    private boolean sunday;
 
     public long getCreatedById() {
         return createdById;
@@ -23,6 +30,14 @@ public class AddGroupRouteRequest {
 
     public void setCreatedById(long createdById) {
         this.createdById = createdById;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Long> getUsers() {
@@ -33,51 +48,83 @@ public class AddGroupRouteRequest {
         this.users = users;
     }
 
-    public double getStartPointLon() {
-        return startPointLon;
+    public Route getRoute() {
+        return route;
     }
 
-    public void setStartPointLon(double startPointLon) {
-        this.startPointLon = startPointLon;
+    public void setRoute(Route route) {
+        this.route = route;
     }
 
-    public double getStartPointLat() {
-        return startPointLat;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStartPointLat(double startPointLat) {
-        this.startPointLat = startPointLat;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public double getEndPointLon() {
-        return endPointLon;
+    public boolean isRecurrent() {
+        return recurrent;
     }
 
-    public void setEndPointLon(double endPointLon) {
-        this.endPointLon = endPointLon;
+    public void setRecurrent(boolean recurrent) {
+        this.recurrent = recurrent;
     }
 
-    public double getEndPointLat() {
-        return endPointLat;
+    public boolean isMonday() {
+        return monday;
     }
 
-    public void setEndPointLat(double endPointLat) {
-        this.endPointLat = endPointLat;
+    public void setMonday(boolean monday) {
+        this.monday = monday;
     }
 
-    public List<Date> getRecurrentOn() {
-        return recurrentOn;
+    public boolean isTuesday() {
+        return tuesday;
     }
 
-    public void setRecurrentOn(List<Date> recurrentOn) {
-        this.recurrentOn = recurrentOn;
+    public void setTuesday(boolean tuesday) {
+        this.tuesday = tuesday;
     }
 
-    public String getChannelId() {
-        return channelId;
+    public boolean isWednesday() {
+        return wednesday;
     }
 
-    public void setChannelId(String channelId) {
-        this.channelId = channelId;
+    public void setWednesday(boolean wednesday) {
+        this.wednesday = wednesday;
+    }
+
+    public boolean isThursday() {
+        return thursday;
+    }
+
+    public void setThursday(boolean thursday) {
+        this.thursday = thursday;
+    }
+
+    public boolean isFriday() {
+        return friday;
+    }
+
+    public void setFriday(boolean friday) {
+        this.friday = friday;
+    }
+
+    public boolean isSaturday() {
+        return saturday;
+    }
+
+    public void setSaturday(boolean saturday) {
+        this.saturday = saturday;
+    }
+
+    public boolean isSunday() {
+        return sunday;
+    }
+
+    public void setSunday(boolean sunday) {
+        this.sunday = sunday;
     }
 }

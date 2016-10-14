@@ -1,4 +1,5 @@
-import { IRoute } from '../shared/interfaces';
+import {GroupRouteRequest} from '../shared/classes';
+import { IGroupRoute, IRoute } from '../shared/interfaces';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
@@ -10,12 +11,17 @@ import { Observable } from 'rxjs/Rx';
 export class RouteService {
 
     private url: string = 'http://localhost:8080/routes/';
+    private urlGroup: string = 'http://localhost:8080/grouproute/'
 
     constructor(private http: Http) {
     }
 
     getRoute(routeId: number): Observable<IRoute> {
         return this.http.get(this.url + "/" + routeId).map(this.extractData);
+    }
+
+    getGroupRoutes(): Observable<GroupRouteRequest[]> {
+        return this.http.get(this.urlGroup).map(this.extractData);        
     }
 
     getRoutesByUserId(userId: number): Observable<IRoute[]> {
@@ -28,9 +34,19 @@ export class RouteService {
             .catch(this.handleError);
     }
 
-    updateRoute(route: IRoute) : Observable<IRoute[]>{
+    saveRouteGroup(routeGroup: IGroupRoute) {
+        return this.http.post(this.urlGroup, routeGroup)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    updateRoute(route: IRoute): Observable<IRoute[]> {
         return this.http.put(this.url + route.id, route)
             .map(this.extractData);
+    }
+
+    addUserToGroup(groupRouteId: number, userDBId: number): Observable<any> {
+        return this.http.get(this.urlGroup + "addUserToGroup/" + groupRouteId + "/" + userDBId).map(this.extractData);
     }
 
     handleError(error: any): any {

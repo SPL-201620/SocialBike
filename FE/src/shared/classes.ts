@@ -1,3 +1,4 @@
+import {IUser} from '../../.tmp/shared/interfaces';
 import { IGroupRoute, IRoute, IUser, IUserLogin } from './interfaces';
 
 export class User implements IUser {
@@ -43,15 +44,41 @@ export class Route implements IRoute {
 }
 
 export class GroupRoute implements IGroupRoute {
-    constructor(public id: number, public createdById: number, public users: number[], public startPointLon: number, public startPointLat: number, public endPointLon: number, public endPointLat: number, public recurrentOn: any[], public channelId: string) {
-        this.id = id;
-        this.createdById = createdById;
-        this.users = users;
-        this.startPointLat = startPointLat;
-        this.startPointLon = startPointLon;
-        this.endPointLat = endPointLat;
-        this.endPointLon = endPointLon;
-        this.recurrentOn = recurrentOn;
-        this.channelId = channelId;
+    public id: number;
+    public name: string;
+    public createdById: number;
+    public users: number[];
+    public route: IRoute;
+    public startDate: Date;
+    public recurrent: boolean;
+    public monday:boolean;
+    public tuesday:boolean;
+    public wednesday:boolean;
+    public thursday:boolean;
+    public friday:boolean;
+    public saturday:boolean;
+    public sunday:boolean;
+
+    constructor(){
+    }
+}
+
+export class GroupRouteRequest {
+    public id: number;
+    public name: string;
+    public createdById: IUser;
+    public users: IUser[];
+    public route: IRoute;
+    public startDate: Date;
+    public recurrent: boolean;
+    public monday:boolean;
+    public tuesday:boolean;
+    public wednesday:boolean;
+    public thursday:boolean;
+    public friday:boolean;
+    public saturday:boolean;
+    public sunday:boolean;
+
+    constructor(){
     }
 }

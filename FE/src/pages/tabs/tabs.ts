@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { HomePage } from '../home/home';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
+import {GroupRoutePage} from '../group/grouproute';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -15,6 +16,7 @@ export class TabsPage {
   tabRoutes: any = RoutesPage;
   tabInfo: any = AboutPage;
   tabContacts: any = ContactPage;
+  tabGroupRoutes: any = GroupRoutePage;
 
   constructor() {
 

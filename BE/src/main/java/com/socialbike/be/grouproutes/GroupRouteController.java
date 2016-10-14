@@ -1,10 +1,12 @@
 package com.socialbike.be.grouproutes;
+import com.socialbike.be.routes.Route;
 import com.socialbike.be.routes.RouteRepository;
 import com.socialbike.be.users.User;
 import com.socialbike.be.users.UserRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +26,11 @@ public class GroupRouteController  {
         this.routeRepository = routeRepository;
     }
 
+    @RequestMapping(method= RequestMethod.GET)
+    public List<GroupRoute> getAllGroupRoutes(){
+        return groupRouteRepository.findAll();
+    }
+
     @RequestMapping(method= RequestMethod.GET, value="/{userId}")
     public List<GroupRoute> getAllGroupRoutesByUser(@PathVariable long userId){
         return null;
@@ -32,21 +39,54 @@ public class GroupRouteController  {
     @RequestMapping(method = RequestMethod.POST)
     public void addGroupRoute(@RequestBody AddGroupRouteRequest addGroupRouteRequest){
         GroupRoute groupRoute = new GroupRoute();
-
+        groupRoute.setName(addGroupRouteRequest.getName());
         groupRoute.setCreatedBy(userRepository.findOne(addGroupRouteRequest.getCreatedById()));
         List<User> users = new ArrayList<>();
+        users.add(userRepository.findOne(addGroupRouteRequest.getCreatedById()));
         for (Long userId : addGroupRouteRequest.getUsers()) {
             User user = userRepository.getOne(userId);
             users.add(user);
         }
         groupRoute.setUsers(users);
-        groupRoute.setStartPointLon(addGroupRouteRequest.getStartPointLon());
-        groupRoute.setStartPointLat(addGroupRouteRequest.getStartPointLat());
-        groupRoute.setEndPointLon(addGroupRouteRequest.getEndPointLon());
-        groupRoute.setEndPointLat(addGroupRouteRequest.getEndPointLat());
-        groupRoute.setRecurrentOn(addGroupRouteRequest.getRecurrentOn());
-        groupRoute.setChannelId(addGroupRouteRequest.getChannelId());
+        groupRoute.setCreatedDate(new Date());
+        groupRoute.setStartDate(addGroupRouteRequest.getStartDate());
+        groupRoute.setRecurrent(addGroupRouteRequest.isRecurrent());
+        groupRoute.setRoute(addGroupRouteRequest.getRoute());
+        groupRoute.setMonday(addGroupRouteRequest.isMonday());
+        groupRoute.setTuesday(addGroupRouteRequest.isTuesday());
+        groupRoute.setWednesday(addGroupRouteRequest.isWednesday());
+        groupRoute.setThursday(addGroupRouteRequest.isThursday());
+        groupRoute.setFriday(addGroupRouteRequest.isFriday());
+        groupRoute.setSaturday(addGroupRouteRequest.isSaturday());
+        groupRoute.setSunday(addGroupRouteRequest.isSunday());
 
         groupRouteRepository.save(groupRoute);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value="/addUserToGroup/{groupRouteId}/{userId}")
+    public void addUserToGroup(@PathVariable long groupRouteId, @PathVariable long userId){
+        User user = userRepository.getOne(userId);
+        GroupRoute groupRoute = groupRouteRepository.findOne(groupRouteId);
+        List<User> users = groupRoute.getUsers();
+        users.add(user);
+        groupRoute.setUsers(users);
+        groupRouteRepository.save(groupRoute);
+        Route route = new Route();
+        route.setUser(user);
+        route.setUser(userRepository.findOne(userId));
+        route.setStartPointLon(groupRoute.getRoute().getStartPointLon());
+        route.setStartPointLat(groupRoute.getRoute().getStartPointLat());
+        route.setStartPointName(groupRoute.getRoute().getStartPointName());
+        route.setEndPointLon(groupRoute.getRoute().getEndPointLon());
+        route.setEndPointLat(groupRoute.getRoute().getEndPointLat());
+        route.setEndPointName(groupRoute.getRoute().getEndPointName());
+        route.setCalories(groupRoute.getRoute().getCalories());
+        route.setSpeed(groupRoute.getRoute().getSpeed());
+        route.setDistance(groupRoute.getRoute().getDistance());
+        route.setStartTime(groupRoute.getRoute().getStartTime());
+        route.setEndTime(groupRoute.getRoute().getEndTime());
+        route.setFinished(groupRoute.getRoute().isFinished());
+
+        routeRepository.save(route);
     }
 }

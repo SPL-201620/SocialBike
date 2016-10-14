@@ -33,12 +33,17 @@ export interface IUserLogin{
 
 export interface IGroupRoute {
     id: number;
+    name: string;
     createdById: number;
     users: number[];
-    startPointLon: number;
-    startPointLat: number;
-    endPointLon: number;
-    endPointLat: number;
-    recurrentOn: any[];
-    channelId: string;
+    route: IRoute;
+    startDate: Date;
+    recurrent: boolean;
+    monday:boolean;
+    tuesday:boolean;
+    wednesday:boolean;
+    thursday:boolean;
+    friday:boolean;
+    saturday:boolean;
+    sunday:boolean;
 }

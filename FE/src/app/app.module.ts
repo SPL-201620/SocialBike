@@ -1,3 +1,6 @@
+import { UtilProvider } from '../services/utils';
+import { NewGroupRoutePage } from '../pages/group/newgroup';
+import { GroupRoutePage } from '../pages/group/grouproute';
 import { ChatPage } from '../pages/contact/chat';
 import { ChatService } from '../services/chats.service';
 import { RoutesPage } from '../pages/routes/routes';
@@ -37,7 +40,9 @@ const myFirebaseAuthConfig = {
     LogInPage,
     RegisterPage,
     RoutesPage,
-    ChatPage
+    ChatPage,
+    GroupRoutePage,
+    NewGroupRoutePage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -53,8 +58,10 @@ const myFirebaseAuthConfig = {
     LogInPage,
     RegisterPage,
     RoutesPage,
-    ChatPage
+    ChatPage,
+    GroupRoutePage,
+    NewGroupRoutePage
   ],
-  providers: [UserService, RouteService, ChatService, Storage]
+  providers: [UserService, RouteService, ChatService, Storage, UtilProvider]
 })
 export class AppModule { }
