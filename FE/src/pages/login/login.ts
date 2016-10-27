@@ -1,9 +1,10 @@
 import {IUser} from '../../shared/interfaces';
-import {UserService} from '../../services/user.service';
+import { UserService } from '../../services/user.service';
 import {TabsPage} from '../tabs/tabs';
 import {RegisterPage} from '../register/register';
+import { SocialMediaLogin } from '../../components/social-media-login/social-media-login';
 import { Component } from '@angular/core';
-import { Storage } from '@ionic/storage'
+import { Storage } from '@ionic/storage';
 
 import { NavController, AlertController } from 'ionic-angular';
 
@@ -15,8 +16,7 @@ import { NavController, AlertController } from 'ionic-angular';
 export class LogInPage {
     public email;
     public password;
-
-    constructor(public navCtrl: NavController, private userService : UserService, public alertCtrl: AlertController, public storage: Storage) {
+   constructor(public navCtrl: NavController, private userService : UserService, public alertCtrl: AlertController, public storage: Storage) {
 
     }
 
@@ -32,6 +32,7 @@ export class LogInPage {
         }, (error: any) => {
             this.showAlert('Login Error', 'Email password combination error.');
         });
+        
     }
 
     registerUser():void{
@@ -46,4 +47,7 @@ export class LogInPage {
         });
         alert.present();
     }
+    
+
+    
 }

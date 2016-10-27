@@ -1,6 +1,9 @@
 import { RoutesPage } from '../routes/routes';
 import { Route } from '../../shared/classes';
+import { LogInPage } from '../login/login';
 import { RouteService } from '../../services/route.service.';
+import { UserService } from '../../services/user.service';
+
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import { NavController, AlertController } from 'ionic-angular';
@@ -29,7 +32,7 @@ export class HomePage {
   hideRouteInfo: boolean;
   routeInfo: any;
 
-  constructor(public navCtrl: NavController, public routeService: RouteService, public storage: Storage, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public routeService: RouteService, public storage: Storage, public alertCtrl: AlertController, private userService : UserService) {
     this.routeInfo = {
       timeText: "",
       timeValue: 0,
@@ -253,4 +256,5 @@ export class HomePage {
     });
     alert.present();
   }
+
 }

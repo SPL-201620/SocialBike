@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { IUser } from '../shared/interfaces';
 
-import { AngularFire, FirebaseRef } from 'angularfire2';
+import { AngularFire, FirebaseRef, AuthMethods, AuthProviders } from 'angularfire2';
 
 import { Storage } from '@ionic/storage';
 
@@ -46,6 +46,16 @@ export class UserService {
         var res: Promise<boolean> = new Promise((resolve, reject) => {
             this.af.auth.login(creds, 4).then(result => {
                 console.log(result);
+                resolve(result);
+            })
+        });
+        return res;
+    }
+
+    loginFirebaseAuthGoogle(myFirebaseAuthConfig) {
+        var res: Promise<boolean> = new Promise((resolve, reject) => {
+            this.af.auth.login(myFirebaseAuthConfig).then(result => {
+                console.log("Resultado+" + result);
                 resolve(result);
             })
         });
@@ -107,5 +117,12 @@ export class UserService {
         }
 
         return body || {};
+    }
+    
+    // Logout del usuario conectado a la aplicacion
+    signOut(): void {
+        this.storage.set('userId', null);
+        this.storage.set('userBDId', null);
+        this.af.auth.logout();
     }
 }

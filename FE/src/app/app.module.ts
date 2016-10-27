@@ -12,6 +12,9 @@ import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LogInPage } from '../pages/login/login';
+import { SocialMediaLogin } from '../components/social-media-login/social-media-login';
+
+
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { Storage } from '@ionic/storage';
 
@@ -37,7 +40,8 @@ const myFirebaseAuthConfig = {
     LogInPage,
     RegisterPage,
     RoutesPage,
-    ChatPage
+    ChatPage,
+    SocialMediaLogin
   ],
   imports: [
     IonicModule.forRoot(MyApp),
