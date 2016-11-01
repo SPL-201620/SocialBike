@@ -9,7 +9,7 @@
   {{text}}
 </div>
 <br>
-<div class="buttons">
+<div class="buttons" [style.visibility]="getVariant()">
   <ion-icon name="logo-google" item-left (click)="loginFirebaseAuthGoogle('Google')"></ion-icon>
   <ion-icon name="logo-facebook" item-left (click)="loginFirebaseAuthGoogle('Facebook')"></ion-icon>
   <ion-icon name="logo-twitter" item-left (click)="loginFirebaseAuthGoogle('Twitter')"></ion-icon>

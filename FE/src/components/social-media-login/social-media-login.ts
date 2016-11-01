@@ -3,15 +3,14 @@ import {IUser} from '../../shared/interfaces';
 import {TabsPage} from '../../pages/tabs/tabs';
 import { AboutPage } from '../../pages/about/about';
 import {RegisterPage} from '../../pages/register/register';
-
 import { User } from '../../shared/classes';
 
 import {UserService} from '../../services/user.service';
-
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { Storage } from '@ionic/storage';
-
 import { NavController, AlertController } from 'ionic-angular';
+
+import { socialMediaFeature } from '../../shared/variabilityconst';
 
 //Credenciales para login por medio de redes sociales
 var myFirebaseSocialAuthConfig = {
@@ -44,13 +43,16 @@ var myFirebaseSocialAuthConfig = {
 export class SocialMediaLogin {
 
   text: string;
+  disp: string = 'none';
   private logUser:any; //guarda el usario logeado en las redes sociales usando firebase
   private user: User; //Clase que tiene los datos del usuario a ser guardado
 
   
   constructor(public navCtrl: NavController, private userService : UserService, public alertCtrl: AlertController, public storage: Storage) {
-    console.log('SocialMediaLogin Component ');
-    this.text = 'Or Sign-in using SocialMedia';
+    if ( socialMediaFeature ) {
+      console.log('SocialMediaLogin Component ');
+      this.text = 'Or Sign-in using SocialMedia';
+    }
   }
   
   loginFirebaseAuthGoogle(provider:String) : void {
@@ -131,5 +133,14 @@ export class SocialMediaLogin {
             buttons: ['OK']
         });
         alert.present();
+  }
+
+  getVariant(): string{
+    if ( socialMediaFeature ) {
+      return 'visible' ;
+    }
+    else {
+      return 'hidden';
+    }
   }
 }
