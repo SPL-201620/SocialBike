@@ -1,4 +1,3 @@
-import { DateTime } from 'c:/dev/SocialBike/FE/node_modules/ionic-angular/es2015/components/datetime/datetime';
 import { RouteService } from '../../services/route.service.';
 import { IRoute } from '../../shared/interfaces';
 import { Component } from '@angular/core';
@@ -13,7 +12,6 @@ import { Storage } from '@ionic/storage';
 
 export class RoutesPage {
     public routes: IRoute[];
-    private geocoder: any;
 
     constructor(public navCtrl: NavController, public routeService: RouteService, public storage: Storage) {
         storage.get("userDBId").then((value) => {

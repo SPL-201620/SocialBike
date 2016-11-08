@@ -1,4 +1,3 @@
-import {IUser} from '../../.tmp/shared/interfaces';
 import { IGroupRoute, IRoute, IUser, IUserLogin } from './interfaces';
 
 export class User implements IUser {

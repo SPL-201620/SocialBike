@@ -1,6 +1,6 @@
-import { User, UserLogin } from '../shared/classes';
+import { UserLogin } from '../shared/classes';
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { IUser } from '../shared/interfaces';
 
-import { AngularFire, FirebaseRef } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 
 import { Storage } from '@ionic/storage';
 
