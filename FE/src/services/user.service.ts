@@ -52,6 +52,16 @@ export class UserService {
         return res;
     }
 
+    loginFirebaseAuthGoogle(myFirebaseAuthConfig) {
+        var res: Promise<boolean> = new Promise((resolve, reject) => {
+            this.af.auth.login(myFirebaseAuthConfig).then(result => {
+                console.log("Resultado+" + result);
+                resolve(result);
+            })
+        });
+        return res;
+    }
+    
     getAllUsers(): Observable<IUser[]> {
         return this.http.get(this.url).map(this.extractData);
     }
