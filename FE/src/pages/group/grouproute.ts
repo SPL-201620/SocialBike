@@ -1,8 +1,7 @@
 import { GroupRouteRequest } from '../../shared/classes';
-import { IGroupRoute, IUser } from '../../shared/interfaces';
+import { IUser } from '../../shared/interfaces';
 import { UserService } from '../../services/user.service';
 import { RouteService } from '../../services/route.service.';
-import { NewGroupRoutePage } from './newgroup';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 

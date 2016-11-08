@@ -5,7 +5,6 @@ import { Component, ViewChild } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 import { Platform, NavParams, ViewController, Content } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 @Component({
     templateUrl: 'chat.html',

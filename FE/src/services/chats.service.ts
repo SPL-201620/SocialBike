@@ -1,7 +1,6 @@
 import { UserService } from './user.service';
-import { Injectable, Inject } from '@angular/core';
-import { AngularFire, FirebaseRef } from 'angularfire2';
-import { Observable } from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { AngularFire } from 'angularfire2';
 
 @Injectable()
 export class ChatService {
@@ -17,7 +16,6 @@ export class ChatService {
     // Add Chat References to Both users 
     addChats(uid, interlocutor) {
         // First User 
-        let otherUid = interlocutor;
         let endpoint = this.af.database.object(`/users/${uid}/chats/${interlocutor}`);
         endpoint.set(true);
 
