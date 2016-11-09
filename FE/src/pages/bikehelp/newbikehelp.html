@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Register</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>New Bike Help</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -8,7 +13,7 @@
   <ion-list inset>
     <ion-item>
       <ion-label>Name</ion-label>
-      <ion-input [(ngModel)]="displayName" type="text"></ion-input>
+      <ion-input [(ngModel)]="name" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Help Type</ion-label>

@@ -1,8 +1,8 @@
-import { User } from '../../shared/classes';
-import { UserService } from '../../services/user.service';
+import { BikeHelp } from '../../shared/classes';
+import { BikeHelpService } from '../../services/bikehelp.service';
+import { UtilProvider } from '../../services/utils';
 import { Component } from '@angular/core';
-
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, ViewController, Platform, NavParams } from 'ionic-angular';
 
 @Component({
     selector: 'page-newbikehelp',
@@ -10,39 +10,27 @@ import { NavController, AlertController } from 'ionic-angular';
 })
 
 export class NewBikeHelpPage {
-    public email;
-    public password;
-    public displayName;
-    public age;
-    public sex;
-    private user: User;
+    public name: string;
+    public type: string;
 
-    constructor(public navCtrl: NavController, private userService: UserService, public alertCtrl: AlertController) {
+    constructor(public navCtrl: NavController, public viewCtrl: ViewController, public platform: Platform, public params: NavParams, public utilService: UtilProvider, public bikehelpService: BikeHelpService) {
 
     }
 
-    registerUser(): void {
-        this.user = new User(-1, "testing", this.email, this.password, this.displayName, "testing", this.age, this.sex);
-        this.userService.saveUserFirebase(this.user.email, this.user.password).then((result: any) => {
-            this.user.firebaseId = result.uid;
-            this.user.pictureUrl = "";
-            this.userService.saveUser(this.user).subscribe((status: boolean) => {
-                if (status) {
-                    this.showAlert("Registration Success!", "Please login to the application with your email and password.");
-                    this.navCtrl.pop();
-                } else {
-                    console.log("There is a problem saving the user.");
-                }
-            });
-        });
+    dismiss() {
+        this.viewCtrl.dismiss();
     }
 
-    showAlert(title: string, subTitle: string) {
-        let alert = this.alertCtrl.create({
-            title: title,
-            subTitle: subTitle,
-            buttons: ['OK']
+    save() {
+        let bikeHelp = new BikeHelp();
+        bikeHelp.name = this.name;
+        bikeHelp.type = this.type;
+        bikeHelp.price = 0;
+        bikeHelp.pointLat = 0;
+        bikeHelp.pointLon = 0;
+        this.bikehelpService.saveBikeHelp(bikeHelp).subscribe(() => {
+            this.utilService.doAlert("Success", "Bike Help Saved", "OK");
+            this.viewCtrl.dismiss();
         });
-        alert.present();
     }
 }

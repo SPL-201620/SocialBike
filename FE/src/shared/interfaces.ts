@@ -49,6 +49,7 @@ export interface IGroupRoute {
 }
 
 export interface IBikeHelp {
+    id: number;
     pointLon: number;
     pointLat: number;
     name: string;

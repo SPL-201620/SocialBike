@@ -1,4 +1,4 @@
-import { IGroupRoute, IRoute, IUser, IUserLogin } from './interfaces';
+import {IBikeHelp, IGroupRoute, IRoute, IUser, IUserLogin} from './interfaces';
 
 export class User implements IUser {
 
@@ -79,5 +79,18 @@ export class GroupRouteRequest {
     public sunday:boolean;
 
     constructor(){
+    }
+}
+
+export class BikeHelp implements IBikeHelp{
+    public id: number;
+    public pointLon: number;
+    public pointLat: number;
+    public name: string;
+    public type: string;
+    public price: number;
+    
+    constructor(){
+
     }
 }

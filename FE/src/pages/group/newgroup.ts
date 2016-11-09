@@ -57,7 +57,7 @@ export class NewGroupRoutePage {
             this.groupRoutes.route.id = route.id;
             this.routeService.saveRouteGroup(this.groupRoutes).subscribe((groupRoute: IGroupRoute) => {
                 this.utilService.doAlert("Success","Group Route Saved","OK");
-                this.navCtrl.push(GroupRoutePage);
+                this.viewCtrl.dismiss();
             });
         });
     }
