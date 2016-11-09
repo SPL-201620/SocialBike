@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>New Bike Help</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input [(ngModel)]="name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Help Type</ion-label>
+      <ion-select [(ngModel)]="type">
+        <ion-option value="Health" selected="true">Health</ion-option>
+        <ion-option value="Repair">Repair</ion-option>
+        <ion-option value="Parking">Parking</ion-option>
+        <ion-option value="Rental">Rental</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button block (click)="save()">Save</button>
+  </div>
+</ion-content>
