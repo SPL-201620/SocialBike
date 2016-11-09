@@ -1,0 +1,30 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>Bike Helps</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only>
+        		<ion-icon name="add"></ion-icon>
+      		</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<ion-list>
+		<ion-list-header>Bike Helps near you</ion-list-header>
+		<div *ngFor="let bikehelp of bikeHelps">
+			<ion-card>
+				<ion-card-header>
+					{{bikehelp.name}}
+				</ion-card-header>
+				<ion-card-content>
+					<ion-item>
+						{{bikehelp.type}}
+					</ion-item>
+					<ion-item>
+						Distance: 0m
+					</ion-item>
+				</ion-card-content>
+			</ion-card>
+		</div>
+	</ion-list>
+</ion-content>

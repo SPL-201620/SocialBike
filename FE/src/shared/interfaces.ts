@@ -47,3 +47,11 @@ export interface IGroupRoute {
     saturday:boolean;
     sunday:boolean;
 }
+
+export interface IBikeHelp {
+    pointLon: number;
+    pointLat: number;
+    name: string;
+    type: string;
+    price: number;
+}

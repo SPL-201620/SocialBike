@@ -1,3 +1,5 @@
+import {BikeHelpService} from '../services/bikehelp.service';
+import {BikeHelpPage} from '../pages/bikehelp/bikehelp';
 import { UtilProvider } from '../services/utils';
 import { NewGroupRoutePage } from '../pages/group/newgroup';
 import { GroupRoutePage } from '../pages/group/grouproute';
@@ -44,7 +46,8 @@ const myFirebaseAuthConfig = {
     ChatPage,
     GroupRoutePage,
     NewGroupRoutePage,
-    SocialMediaLogin
+    SocialMediaLogin,
+    BikeHelpPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -62,8 +65,9 @@ const myFirebaseAuthConfig = {
     RoutesPage,
     ChatPage,
     GroupRoutePage,
-    NewGroupRoutePage
+    NewGroupRoutePage,
+    BikeHelpPage
   ],
-  providers: [UserService, RouteService, ChatService, Storage, UtilProvider]
+  providers: [UserService, RouteService, ChatService, Storage, UtilProvider, BikeHelpService]
 })
 export class AppModule { }

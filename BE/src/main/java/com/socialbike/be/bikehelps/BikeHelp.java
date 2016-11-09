@@ -1,13 +1,11 @@
 package com.socialbike.be.bikehelps;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by jfsan on 08-Nov-16.
  */
+@Entity
 public class BikeHelp {
     @Id
     @GeneratedValue
@@ -15,8 +13,10 @@ public class BikeHelp {
     private double pointLon;
     private double pointLat;
     private String name;
+
     @Enumerated(EnumType.STRING)
     private BikeHelpType type;
+
     private int price;
 
     public long getId() {
