@@ -1,3 +1,4 @@
+import {BikeHelpPage} from '../bikehelp/bikehelp';
 import {RoutesPage} from '../routes/routes';
 import { Component } from '@angular/core';
 
@@ -17,6 +18,7 @@ export class TabsPage {
   tabInfo: any = AboutPage;
   tabContacts: any = ContactPage;
   tabGroupRoutes: any = GroupRoutePage;
+  tabBikeHelps: any = BikeHelpPage;
 
   constructor() {
 
