@@ -22,6 +22,9 @@ import { SocialMediaLogin } from '../components/social-media-login/social-media-
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { Storage } from '@ionic/storage';
 
+import {SocialMediaShareComponent} from '../components/social-media-share/social-media-share';
+
+
 export const firebaseConfig = {
   apiKey: "AIzaSyCf9dVvBne3UGKsyK4U4Z62fnKezfeCfkU",
   authDomain: "socialbike-145413.firebaseapp.com",
@@ -49,7 +52,8 @@ const myFirebaseAuthConfig = {
     NewGroupRoutePage,
     SocialMediaLogin,
     BikeHelpPage,
-    NewBikeHelpPage
+    NewBikeHelpPage,
+    SocialMediaShareComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
