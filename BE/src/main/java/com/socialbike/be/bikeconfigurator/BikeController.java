@@ -16,8 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/bikeconfigurator")
 public class BikeController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public void getBikeConfiguration() {
+    BikeFacade bikeConfigFacade = new BikeFacade();
+    Bike foundBike;
 
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity getBikeConfiguration(@RequestBody BikeImpl selectedBike) {
+
+        foundBike = this.bikeConfigFacade.getBikeConfiguration(selectedBike);
+
+        if(foundBike != null)
+            return new ResponseEntity(foundBike, HttpStatus.OK);
+        else
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

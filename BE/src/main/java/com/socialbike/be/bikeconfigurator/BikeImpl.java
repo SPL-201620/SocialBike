@@ -6,9 +6,12 @@ public class BikeImpl implements Bike {
 	private int	wheeleSize;
 	private int gearControl;
 	private double matchRate = 0;
-	
-	
-	
+
+
+	public BikeImpl() {
+		super();
+	}
+
 	public BikeImpl(String bikeType, String frameType, int wheeleSize, int gearControl) {
 		super();
 		this.bikeType = bikeType;

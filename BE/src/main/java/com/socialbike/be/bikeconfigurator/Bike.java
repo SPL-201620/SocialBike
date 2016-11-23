@@ -1,12 +1,20 @@
 package com.socialbike.be.bikeconfigurator;
 
-public interface Bike {
-	public String getBikeType();
-	public String getFrameType();
-	public int getWheeleSize();
-	public int getGearControl();
-	public double getMatchRate();
-	public void setMatchRate(double matchRate);
-	public int hashCode();
+import java.io.Serializable;
+
+public interface Bike extends Serializable {
+
+	String bikeType = "";
+	String frameType = "";
+	int	wheeleSize = 0;
+	int gearControl = 0;
+
+	String getBikeType();
+	String getFrameType();
+	int getWheeleSize();
+	int getGearControl();
+	double getMatchRate();
+	void setMatchRate(double matchRate);
+	int hashCode();
 	
 }
