@@ -26,7 +26,8 @@ public class BikeHelpController {
     public ResponseEntity addGroupRoute(@RequestBody AddBikeHelp addBikeHelpRequest) {
         BikeHelp bikeHelp = new BikeHelp();
         bikeHelp.setName(addBikeHelpRequest.getName());
-        bikeHelp.setPrice(addBikeHelpRequest.getPrice());
+        bikeHelp.setLowerPrice(addBikeHelpRequest.getLowerPrice());
+        bikeHelp.setUpperPrice(addBikeHelpRequest.getUpperPrice());
         bikeHelp.setPointLat(addBikeHelpRequest.getPointLat());
         bikeHelp.setPointLon(addBikeHelpRequest.getPointLon());
         bikeHelp.setType(addBikeHelpRequest.getType());

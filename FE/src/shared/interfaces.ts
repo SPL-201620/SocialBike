@@ -54,5 +54,6 @@ export interface IBikeHelp {
     pointLat: number;
     name: string;
     type: string;
-    price: number;
+    lowerPrice: number;
+    upperPrice: number;
 }

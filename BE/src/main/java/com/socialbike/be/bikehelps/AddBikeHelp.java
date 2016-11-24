@@ -9,7 +9,8 @@ public class AddBikeHelp {
     private double pointLat;
     private String name;
     private BikeHelpType type;
-    private int price;
+    private int lowerPrice;
+    private int upperPrice;
 
     public double getPointLon() {
         return pointLon;
@@ -43,11 +44,19 @@ public class AddBikeHelp {
         this.type = type;
     }
 
-    public int getPrice() {
-        return price;
+    public int getLowerPrice() {
+        return lowerPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setLowerPrice(int lowerPrice) {
+        this.lowerPrice = lowerPrice;
+    }
+
+    public int getUpperPrice() {
+        return upperPrice;
+    }
+
+    public void setUpperPrice(int upperPrice) {
+        this.upperPrice = upperPrice;
     }
 }
