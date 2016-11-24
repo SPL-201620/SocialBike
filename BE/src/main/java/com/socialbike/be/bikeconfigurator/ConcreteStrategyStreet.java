@@ -5,7 +5,7 @@ import java.util.List;
 import com.socialbike.be.bikeconfigurator.BikeConfiguration;
 
 public class ConcreteStrategyStreet implements BikeStrategy {
-	List<Bike> bikes = BikeConfiguration.getInstance().getConfigurations("street.csv");
+	List<Bike> bikes = BikeConfiguration.getInstance().getConfigurations("BikeConfigRes/street.csv");
 	
 	Bike mostSimilar = null;
 	double matchFactor = 0;

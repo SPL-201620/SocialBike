@@ -20,7 +20,7 @@ public class BikeController {
     Bike foundBike;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity getBikeConfiguration(@RequestBody BikeImpl selectedBike) {
+    public ResponseEntity getBikeConfiguration(@RequestBody Bike selectedBike) {
 
         foundBike = this.bikeConfigFacade.getBikeConfiguration(selectedBike);
 
@@ -28,5 +28,6 @@ public class BikeController {
             return new ResponseEntity(foundBike, HttpStatus.OK);
         else
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
+
     }
 }

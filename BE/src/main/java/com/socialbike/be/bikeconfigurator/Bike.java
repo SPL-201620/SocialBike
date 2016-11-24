@@ -1,8 +1,18 @@
 package com.socialbike.be.bikeconfigurator;
 
 import java.io.Serializable;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-public interface Bike extends Serializable {
+
+/**
+ * Created by Gabriel on 22/11/16.
+ * Interfaz para manejar varios tipos de bicicleta
+ */
+
+
+
+@JsonDeserialize(using = BikeDeserializer.class)
+public interface Bike {
 
 	String bikeType = "";
 	String frameType = "";

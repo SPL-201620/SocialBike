@@ -1,5 +1,8 @@
 package com.socialbike.be.bikeconfigurator;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(as = BikeImpl.class)
 public class BikeImpl implements Bike {
 	private String bikeType;
 	private String frameType;
@@ -8,9 +11,7 @@ public class BikeImpl implements Bike {
 	private double matchRate = 0;
 
 
-	public BikeImpl() {
-		super();
-	}
+	public BikeImpl() {}
 
 	public BikeImpl(String bikeType, String frameType, int wheeleSize, int gearControl) {
 		super();

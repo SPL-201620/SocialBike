@@ -8,7 +8,11 @@ import java.util.List;
 import com.csvreader.CsvReader;
 import com.socialbike.be.bikeconfigurator.BikeImpl;
 
-//Singleton para leer las configuraciones de las bicicletas
+/*
+Creado Gabriel
+Singleton para leer las configuraciones de las bicicletas del archivo plano
+Simulando un arbol de Features
+*/
 public class BikeConfiguration {
 	private static BikeConfiguration instance = null;
 	
