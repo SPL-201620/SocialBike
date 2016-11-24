@@ -27,7 +27,7 @@ public class BikeController {
         if(foundBike != null)
             return new ResponseEntity(foundBike, HttpStatus.OK);
         else
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(selectedBike, HttpStatus.OK);
 
     }
 }

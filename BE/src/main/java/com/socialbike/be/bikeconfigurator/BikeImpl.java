@@ -15,8 +15,8 @@ public class BikeImpl implements Bike {
 
 	public BikeImpl(String bikeType, String frameType, int wheeleSize, int gearControl) {
 		super();
-		this.bikeType = bikeType;
-		this.frameType = frameType;
+		this.bikeType = (bikeType == null? "": bikeType);
+		this.frameType = (frameType == null? "": frameType);
 		this.wheeleSize = wheeleSize;
 		this.gearControl = gearControl;
 	}
@@ -25,14 +25,14 @@ public class BikeImpl implements Bike {
 		return bikeType;
 	}
 	public void setBikeType(String bikeType) {
-		this.bikeType = bikeType;
+		this.bikeType = (bikeType == null? "": bikeType);
 	}
 	
 	public String getFrameType() {
 		return frameType;
 	}
 	public void setFrameType(String frameType) {
-		this.frameType = frameType;
+		this.frameType = (frameType == null? "": frameType);
 	}
 	public int getWheeleSize() {
 		return wheeleSize;

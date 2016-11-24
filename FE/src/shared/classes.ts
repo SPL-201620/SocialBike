@@ -1,4 +1,4 @@
-import {IBikeHelp, IGroupRoute, IRoute, IUser, IUserLogin} from './interfaces';
+import {IBikeHelp, IGroupRoute, IRoute, IUser, IUserLogin, IBike} from './interfaces';
 
 export class User implements IUser {
 
@@ -92,5 +92,18 @@ export class BikeHelp implements IBikeHelp{
     
     constructor(){
 
+    }
+}
+
+export class Bike implements IBike {
+
+	bikeType: string;
+	frameType: string;
+	wheeleSize: number;
+	gearControl: number;
+	matchRate: number;
+    
+    constructor(){
+    
     }
 }

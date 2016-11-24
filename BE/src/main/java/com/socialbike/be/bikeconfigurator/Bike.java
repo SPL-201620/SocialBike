@@ -18,6 +18,7 @@ public interface Bike {
 	String frameType = "";
 	int	wheeleSize = 0;
 	int gearControl = 0;
+	double matchRate = 0;
 
 	String getBikeType();
 	String getFrameType();
