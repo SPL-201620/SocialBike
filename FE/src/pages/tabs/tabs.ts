@@ -6,6 +6,10 @@ import { HomePage } from '../home/home';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
 import {GroupRoutePage} from '../group/grouproute';
+import {BikeconfiguratorPage} from '../bikeconfigurator/bikeconfigurator';
+
+import { bikeConfiguratorFeature } from '../../shared/variabilityconst';
+import { bikeHelpsFeature } from '../../shared/variabilityconst';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -19,6 +23,9 @@ export class TabsPage {
   tabContacts: any = ContactPage;
   tabGroupRoutes: any = GroupRoutePage;
   tabBikeHelps: any = BikeHelpPage;
+  tabBikeConfig: any = BikeconfiguratorPage;
+  showBikeConfig:Boolean = bikeConfiguratorFeature;
+  showBikeHelp:Boolean = bikeHelpsFeature;
 
   constructor() {
 

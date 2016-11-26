@@ -2,7 +2,12 @@
   <ion-tab [root]="tabHome" tabTitle="Single" tabIcon="navigate"></ion-tab>
   <ion-tab [root]="tabGroupRoutes" tabTitle="Group" tabIcon="analytics"></ion-tab>  
   <ion-tab [root]="tabRoutes" tabTitle="Routes" tabIcon="map"></ion-tab>
-  <ion-tab [root]="tabBikeHelps" tabTitle="Help" tabIcon="help-buoy"></ion-tab>
+  <div *ngIf="showBikeHelp">
+    <ion-tab [root]="tabBikeHelps" tabTitle="Help" tabIcon="help-buoy"></ion-tab>
+  </div>
+  <div *ngIf="showBikeConfig">
+    <ion-tab [root]="tabBikeConfig" tabTitle="Bikes" tabIcon="construct"></ion-tab>
+  </div>
   <ion-tab [root]="tabContacts" tabTitle="Contact" tabIcon="contacts"></ion-tab>
   <ion-tab [root]="tabInfo" tabTitle="About" tabIcon="information-circle"></ion-tab>
 </ion-tabs>

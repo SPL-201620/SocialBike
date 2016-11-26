@@ -56,3 +56,12 @@ export interface IBikeHelp {
     type: string;
     price: number;
 }
+
+export interface IBike {
+
+	bikeType: string;
+	frameType: string;
+	wheeleSize: number;
+	gearControl: number;
+	matchRate: number;
+}
