@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel>
+		<properties/>
+		<struct>
+			<and abstract="true" mandatory="true" name="SocialBike">
+				<description>
+					
+				</description>
+				<feature mandatory="true" name="UserManagment">
+					<description>
+						
+					</description>
+				</feature>
+				<and mandatory="true" name="Authentication">
+					<description>
+						
+					</description>
+					<feature mandatory="true" name="Regular">
+						<description>
+							
+						</description>
+					</feature>
+					<feature name="Facebook">
+						<description>
+							
+						</description>
+					</feature>
+					<feature name="Twitter">
+						<description>
+							
+						</description>
+					</feature>
+				</and>
+				<feature mandatory="true" name="Messaging">
+					<description>
+						
+					</description>
+				</feature>
+				<and mandatory="true" name="Routes">
+					<description>
+						
+					</description>
+					<feature mandatory="true" name="Single">
+						<description>
+							
+						</description>
+					</feature>
+					<feature mandatory="true" name="Group">
+						<description>
+							
+						</description>
+					</feature>
+				</and>
+				<feature name="BikeConfigurator">
+					<description>
+						
+					</description>
+				</feature>
+				<or name="Reporting">
+					<description>
+						
+					</description>
+					<feature mandatory="true" name="Weekly">
+						<description>
+							
+						</description>
+					</feature>
+					<feature mandatory="true" name="Monthly">
+						<description>
+							
+						</description>
+					</feature>
+				</or>
+				<or name="BikeAids">
+					<description>
+						
+					</description>
+					<feature mandatory="true" name="Rentals">
+						<description>
+							
+						</description>
+					</feature>
+					<feature mandatory="true" name="Mechanics">
+						<description>
+							
+						</description>
+					</feature>
+					<feature mandatory="true" name="Health">
+						<description>
+							
+						</description>
+					</feature>
+					<feature mandatory="true" name="Parking">
+						<description>
+							
+						</description>
+					</feature>
+				</or>
+				<feature name="Achivements">
+					<description>
+						
+					</description>
+				</feature>
+				<or name="ShareOnSocialNetworks">
+					<description>
+						
+					</description>
+					<feature mandatory="true" name="ShareOnFacebook">
+						<description>
+							
+						</description>
+					</feature>
+					<feature mandatory="true" name="ShareOnTwitter">
+						<description>
+							
+						</description>
+					</feature>
+				</or>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>ShareOnFacebook</var>
+					<var>Facebook</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>ShareOnTwitter</var>
+					<var>Twitter</var>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
