@@ -13,11 +13,12 @@ public class BikeHelp {
     private double pointLon;
     private double pointLat;
     private String name;
-
     @Enumerated(EnumType.STRING)
     private BikeHelpType type;
-
-    private int price;
+    private int lowerPrice;
+    private int upperPrice;
+    @Transient
+    private double distance;
 
     public long getId() {
         return id;
@@ -59,11 +60,27 @@ public class BikeHelp {
         this.type = type;
     }
 
-    public int getPrice() {
-        return price;
+    public int getLowerPrice() {
+        return lowerPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setLowerPrice(int lowerPrice) {
+        this.lowerPrice = lowerPrice;
+    }
+
+    public int getUpperPrice() {
+        return upperPrice;
+    }
+
+    public void setUpperPrice(int upperPrice) {
+        this.upperPrice = upperPrice;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

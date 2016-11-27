@@ -17,14 +17,18 @@ export class ContactPage {
   public userFriends: any[];
 
   constructor(public navCtrl: NavController, public userService: UserService, public modalCtrl: ModalController) {
-    userService.getCurrentDBUserId().then((userDBId) => {
+
+  }
+
+  ionViewWillEnter() {
+    this.userService.getCurrentDBUserId().then((userDBId) => {
       this.currentUserDBId = userDBId;
-      userService.getCurrentFirebaseUserId().then((userId) => {
+      this.userService.getCurrentFirebaseUserId().then((userId) => {
         this.currentUserId = userId;
-        userService.getUserFriends().then(res => {
+        this.userService.getUserFriends().then(res => {
           res.subscribe(friends => {
             this.userFriends = friends;
-            userService.getAllUsers().subscribe((users: IUser[]) => {
+            this.userService.getAllUsers().subscribe((users: IUser[]) => {
               this.users = users;
             });
           });
@@ -35,6 +39,9 @@ export class ContactPage {
 
   openChat(userChat: any) {
     let modal = this.modalCtrl.create(ChatPage, userChat);
+    modal.onDidDismiss(() => {
+      this.ionViewWillEnter();
+    });
     modal.present();
   }
 

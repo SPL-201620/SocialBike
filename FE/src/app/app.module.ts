@@ -1,8 +1,9 @@
-import {NewBikeHelpPage} from '../pages/bikehelp/newbikehelp';
-import {BikeconfiguratorPage} from '../pages/bikeconfigurator/bikeconfigurator';
-import {BikeHelpService} from '../services/bikehelp.service';
-import {BikeConfiguratorService} from '../services/bikeconfigurator.service';
-import {BikeHelpPage} from '../pages/bikehelp/bikehelp';
+import { BikeHelpMapPage } from '../pages/bikehelp/bikehelpmap';
+import { NewBikeHelpPage } from '../pages/bikehelp/newbikehelp';
+import { BikeconfiguratorPage } from '../pages/bikeconfigurator/bikeconfigurator';
+import { BikeHelpService } from '../services/bikehelp.service';
+import { BikeConfiguratorService } from '../services/bikeconfigurator.service';
+import { BikeHelpPage } from '../pages/bikehelp/bikehelp';
 import { UtilProvider } from '../services/utils';
 import { NewGroupRoutePage } from '../pages/group/newgroup';
 import { GroupRoutePage } from '../pages/group/grouproute';
@@ -24,7 +25,7 @@ import { SocialMediaLogin } from '../components/social-media-login/social-media-
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { Storage } from '@ionic/storage';
 
-import {SocialMediaShareComponent} from '../components/social-media-share/social-media-share';
+import { SocialMediaShareComponent } from '../components/social-media-share/social-media-share';
 
 
 export const firebaseConfig = {
@@ -55,6 +56,7 @@ const myFirebaseAuthConfig = {
     SocialMediaLogin,
     BikeHelpPage,
     NewBikeHelpPage,
+    BikeHelpMapPage,
     SocialMediaShareComponent,
     BikeconfiguratorPage
   ],
@@ -77,6 +79,7 @@ const myFirebaseAuthConfig = {
     NewGroupRoutePage,
     BikeHelpPage,
     NewBikeHelpPage,
+    BikeHelpMapPage,
     BikeconfiguratorPage
   ],
   providers: [UserService, RouteService, ChatService, Storage, UtilProvider, BikeHelpService, BikeConfiguratorService]

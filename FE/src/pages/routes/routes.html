@@ -5,17 +5,50 @@
 </ion-header>
 
 <ion-content padding>
-	<div *ngFor="let route of routes">
+	<div *ngIf="isActive">
+		<ion-item-divider ion-item light>
+			Current Route
+			<ion-icon item-right name="alarm"></ion-icon>
+		</ion-item-divider>
 		<ion-card>
+			<ion-card-content>
+				<ion-card-title>
+					Route {{activeRoute.id}}
+				</ion-card-title>
+				<ion-item>
+					Start Time:<br/> {{activeRoute.startTime | date:'medium' }}
+				</ion-item>
+				<ion-item>
+					Distance
+					<ion-badge item-right>{{activeRoute.distance}} meters</ion-badge>
+				</ion-item>
+				<ion-item>
+					Start: {{activeRoute.startPointName }}
+				</ion-item>
+				<ion-item>
+					End: {{activeRoute.endPointName }}
+				</ion-item>
+				<div>
+					<button ion-button color="danger" (click)="endRoute(activeRoute)">End Route</button>
+				</div>
+			</ion-card-content>
+		</ion-card>
+	</div>
+	<ion-item-divider ion-item light *ngIf="isActive">
+		My Routes
+		<ion-icon item-right name="bicycle"></ion-icon>
+	</ion-item-divider>
+	<div *ngFor="let route of routes">
+		<ion-card *ngIf="route.finished">
 			<ion-card-content>
 				<ion-card-title>
 					Route {{route.id}}
 				</ion-card-title>
 				<ion-item>
-					Start Time:<br/> {{route.startTime}}
+					Start Time:<br/> {{route.startTime | date:'medium'}}
 				</ion-item>
 				<ion-item *ngIf="route.finished">
-					End Time:<br/> {{route.endTime}}
+					End Time:<br/> {{route.endTime | date:'medium'}}
 				</ion-item>
 				<ion-item>
 					Distance

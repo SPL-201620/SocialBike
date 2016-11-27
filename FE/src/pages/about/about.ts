@@ -21,8 +21,12 @@ export class AboutPage {
   public currentUserId: string;
 
   constructor(public navCtrl: NavController, public storage: Storage, public userService: UserService, public alertCtrl: AlertController, public modalCtrl: ModalController) {
+
+  }
+
+  ionViewWillEnter() {
     this.friends = new Array();
-    userService.getCurrentFirebaseUserId().then((userId) => {
+    this.userService.getCurrentFirebaseUserId().then((userId) => {
       this.userService.getUserByFirebaseId(userId).subscribe((user: IUser) => {
         this.user = user;
         this.email = user.email;

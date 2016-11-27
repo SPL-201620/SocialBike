@@ -13,7 +13,7 @@
 					{{route.name}}
 				</ion-card-header>
 				<ion-card-content>
-					Start Date: {{ route.startDate }}
+					Start Date: {{ route.startDate | date:'medium'}}
 					<div *ngIf="route.recurrent">
 						<ion-badge *ngIf="route.monday">Monday</ion-badge>
 						<ion-badge *ngIf="route.tuesday">Tuesday</ion-badge>

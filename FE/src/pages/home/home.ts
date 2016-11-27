@@ -1,4 +1,5 @@
-import {NewGroupRoutePage} from '../group/newgroup';
+import { IRoute } from '../../shared/interfaces';
+import { NewGroupRoutePage } from '../group/newgroup';
 import { RoutesPage } from '../routes/routes';
 import { Route } from '../../shared/classes';
 import { RouteService } from '../../services/route.service.';
@@ -30,7 +31,11 @@ export class HomePage {
   hideRouteInfo: boolean;
   routeInfo: any;
 
-  constructor(public navCtrl: NavController, public routeService: RouteService, public storage: Storage, public alertCtrl: AlertController,  public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public routeService: RouteService, public storage: Storage, public alertCtrl: AlertController, public modalCtrl: ModalController) {
+    this.initParameters();
+  }
+
+  initParameters(){
     this.routeInfo = {
       timeText: "",
       timeValue: 0,
@@ -49,38 +54,48 @@ export class HomePage {
     this.directionsDisplay = new google.maps.DirectionsRenderer;
   }
 
-  ngOnInit() {
-    this.loadMap();
-    // get the two fields
-    let input_from = (<HTMLInputElement>(document.getElementById("journey_from").getElementsByTagName('input')[0]));
-    let input_to = (<HTMLInputElement>(document.getElementById("journey_to").getElementsByTagName('input')[0]));
+  ionViewWillEnter() {
+    this.initParameters();
+    this.storage.get("userDBId").then((value) => {
+      this.routeService.getUserActiveRoute(value).subscribe((route: IRoute) => {
+        if (Object.keys(route).length === 0 && route.constructor === Object) {
+          this.loadMap();
+          // get the two fields
+          let input_from = (<HTMLInputElement>(document.getElementById("journey_from").getElementsByTagName('input')[0]));
+          let input_to = (<HTMLInputElement>(document.getElementById("journey_to").getElementsByTagName('input')[0]));
 
-    // set the options
-    let options = {
-      types: [],
-      componentRestrictions: {}
-    };
+          // set the options
+          let options = {
+            types: [],
+            componentRestrictions: {}
+          };
 
-    let autocomplete1 = new google.maps.places.Autocomplete(input_from, options);
-    let autocomplete2 = new google.maps.places.Autocomplete(input_to, options);
+          let autocomplete1 = new google.maps.places.Autocomplete(input_from, options);
+          let autocomplete2 = new google.maps.places.Autocomplete(input_to, options);
 
-    google.maps.event.addListener(autocomplete1, "place_changed", (): void => {
-      let place = autocomplete1.getPlace();
-      let geometry = place.geometry;
-      if ((geometry) !== undefined) {
-        this.fromPlace = { lat: geometry.location.lat(), lng: geometry.location.lng() };
-        this.addMarkerToMap(place);
-      }
-    });
+          google.maps.event.addListener(autocomplete1, "place_changed", (): void => {
+            let place = autocomplete1.getPlace();
+            let geometry = place.geometry;
+            if ((geometry) !== undefined) {
+              this.fromPlace = { lat: geometry.location.lat(), lng: geometry.location.lng() };
+              this.addMarkerToMap(place);
+            }
+          });
 
-    google.maps.event.addListener(autocomplete2, "place_changed", (): void => {
-      let place = autocomplete2.getPlace();
-      let geometry = place.geometry;
+          google.maps.event.addListener(autocomplete2, "place_changed", (): void => {
+            let place = autocomplete2.getPlace();
+            let geometry = place.geometry;
 
-      if ((geometry) !== undefined) {
-        this.toPlace = { lat: geometry.location.lat(), lng: geometry.location.lng() };
-        this.addMarkerToMap(place);
-      }
+            if ((geometry) !== undefined) {
+              this.toPlace = { lat: geometry.location.lat(), lng: geometry.location.lng() };
+              this.addMarkerToMap(place);
+            }
+          });
+        }else{
+          this.showAlert("Alert!", "Please finish your current Route!");
+          this.navCtrl.parent.select(1);
+        }
+      });
     });
   }
 
@@ -241,7 +256,7 @@ export class HomePage {
       route.finished = false;
       this.routeService.saveRoute(route).subscribe((res) => {
         this.showAlert("Success", "Started new route, check and end routes in your routes page.")
-        this.navCtrl.push(RoutesPage);
+        this.navCtrl.parent.select(1);
       });
     })
   }
