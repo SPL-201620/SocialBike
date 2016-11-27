@@ -1,0 +1,17 @@
+<!--
+  Generated template for the SocialMediaShare component.
+
+  See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
+  for more info on Angular 2 Components.
+-->
+<br>
+<div class="SocialMedia">
+  {{text}}
+</div>
+<br>
+<div class="buttons" [style.visibility]="getVariant()">
+  <!--button CeiboShare  [facebook]="{u: repoUrl}">Facebook</button-->
+  <ion-icon name="logo-google" item-left (click)="shareSocialMedia('Google')"></ion-icon>
+  <ion-icon name="logo-facebook" item-left (click)="shareSocialMedia('Facebook')"></ion-icon>
+  <ion-icon name="logo-twitter" item-left (click)="shareSocialMedia('Twitter')"></ion-icon>
+</div>

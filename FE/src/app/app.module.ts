@@ -1,5 +1,7 @@
 import {NewBikeHelpPage} from '../pages/bikehelp/newbikehelp';
+import {BikeconfiguratorPage} from '../pages/bikeconfigurator/bikeconfigurator';
 import {BikeHelpService} from '../services/bikehelp.service';
+import {BikeConfiguratorService} from '../services/bikeconfigurator.service';
 import {BikeHelpPage} from '../pages/bikehelp/bikehelp';
 import { UtilProvider } from '../services/utils';
 import { NewGroupRoutePage } from '../pages/group/newgroup';
@@ -21,6 +23,9 @@ import { LogInPage } from '../pages/login/login';
 import { SocialMediaLogin } from '../components/social-media-login/social-media-login';
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { Storage } from '@ionic/storage';
+
+import {SocialMediaShareComponent} from '../components/social-media-share/social-media-share';
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCf9dVvBne3UGKsyK4U4Z62fnKezfeCfkU",
@@ -49,7 +54,9 @@ const myFirebaseAuthConfig = {
     NewGroupRoutePage,
     SocialMediaLogin,
     BikeHelpPage,
-    NewBikeHelpPage
+    NewBikeHelpPage,
+    SocialMediaShareComponent,
+    BikeconfiguratorPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -69,8 +76,9 @@ const myFirebaseAuthConfig = {
     GroupRoutePage,
     NewGroupRoutePage,
     BikeHelpPage,
-    NewBikeHelpPage
+    NewBikeHelpPage,
+    BikeconfiguratorPage
   ],
-  providers: [UserService, RouteService, ChatService, Storage, UtilProvider, BikeHelpService]
+  providers: [UserService, RouteService, ChatService, Storage, UtilProvider, BikeHelpService, BikeConfiguratorService]
 })
 export class AppModule { }

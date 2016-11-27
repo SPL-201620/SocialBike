@@ -57,3 +57,12 @@ export interface IBikeHelp {
     lowerPrice: number;
     upperPrice: number;
 }
+
+export interface IBike {
+
+	bikeType: string;
+	frameType: string;
+	wheeleSize: number;
+	gearControl: number;
+	matchRate: number;
+}

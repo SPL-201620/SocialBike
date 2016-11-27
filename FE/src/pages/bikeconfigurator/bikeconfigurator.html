@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Bike Configurator</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list inset>
+    <ion-item color={{colorbt}}>
+      <ion-label>Type of Your Bike</ion-label>
+      <ion-select [(ngModel)]="bikeType">
+        <ion-option value="Mountain" selected="true">Mountain</ion-option>
+        <ion-option value="Speed">Speed</ion-option>
+        <ion-option value="Street">Street</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list inset>
+    <ion-item color={{colorft}}>
+      <ion-label>Kind of Frame</ion-label>
+      <ion-select [(ngModel)]="frameType">
+        <ion-option value="Diamond" selected="true">Diamond</ion-option>
+        <ion-option value="Triathlon">Triathlon</ion-option>
+        <ion-option value="Step-through">Step-through</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list inset>
+    <ion-item color={{colorws}}>
+      <ion-label>Wheels Size in Inches</ion-label>
+      <ion-select [(ngModel)]="wheeleSize">
+        <ion-option value="22" selected="true">22</ion-option>
+        <ion-option value="24">24</ion-option>
+        <ion-option value="26">26</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list> 
+  <ion-list inset>
+    <ion-item color={{colorgc}}>
+      <ion-label>Gear Shifter</ion-label>
+      <ion-select [(ngModel)]="gearControl">
+        <ion-option value="1">Without Shifter</ion-option>
+        <ion-option value="2" selected="true">Grip Shift</ion-option>
+        <ion-option value="3">Trigger Shifters</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list> 
+  <div padding>
+    <button ion-button block (click)="sendConfiguration()">Validate</button>
+  </div>
+</ion-content>
