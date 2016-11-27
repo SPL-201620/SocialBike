@@ -2,6 +2,7 @@ package com.socialbike.be.routes;
 
 import com.socialbike.be.users.User;
 import com.socialbike.be.users.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
@@ -61,7 +62,8 @@ public class RouteController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{routeId}")
-    public List<Route> updateUser(@RequestBody AddRouteRequest addRouteRequest, @PathVariable("routeId") long routeId) {
+    @ResponseStatus(value = HttpStatus.OK)
+    public void updateRoute(@RequestBody AddRouteRequest addRouteRequest, @PathVariable("routeId") long routeId) {
         Route route = routeRepository.findOne(routeId);
         long milliseconds = (addRouteRequest.getEndTime().getTime() - addRouteRequest.getStartTime().getTime());
         long duration = TimeUnit.MILLISECONDS.toHours(milliseconds);
@@ -70,6 +72,15 @@ public class RouteController {
         route.setEndTime(addRouteRequest.getEndTime());
         route.setSpeed(speed);
         routeRepository.save(route);
-        return routeRepository.findByUserId(route.getUser().getId());
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "active/{userId}")
+    public Route userActiveRoute(@PathVariable long userId){
+        List<Route> routes = routeRepository.findByUserId(userId);
+        for (Route r : routes) {
+            if(!r.isFinished())
+                return r;
+        }
+        return null;
     }
 }

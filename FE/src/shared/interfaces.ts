@@ -56,6 +56,7 @@ export interface IBikeHelp {
     type: string;
     lowerPrice: number;
     upperPrice: number;
+    distance: number;
 }
 
 export interface IBike {

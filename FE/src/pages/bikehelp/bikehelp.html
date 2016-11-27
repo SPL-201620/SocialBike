@@ -11,17 +11,29 @@
 <ion-content>
 	<ion-list>
 		<ion-list-header>Bike Helps near you</ion-list-header>
+		<ion-item>
+			<ion-label>
+				Distance (Kilometers)
+				<ion-badge item-right>{{range}}</ion-badge>
+			</ion-label>
+			<ion-range [(ngModel)]="range" min="0" max="10" step="3" snaps="true" (ionChange)="onDistanceChange($event)"></ion-range>
+		</ion-item>
 		<div *ngFor="let bikehelp of bikeHelps">
 			<ion-card>
 				<ion-card-header>
 					{{bikehelp.name}}
+					<ion-buttons end>
+						<button ion-button icon-only (click)="showBikeHelpInfo(bikehelp.id)">
+							<ion-icon name="information-circle"></ion-icon>
+						</button>
+					</ion-buttons>
 				</ion-card-header>
 				<ion-card-content>
 					<ion-item>
 						{{bikehelp.type}}
 					</ion-item>
 					<ion-item>
-						Distance: 0m
+						Distance: {{bikehelp.distance }} km
 					</ion-item>
 				</ion-card-content>
 			</ion-card>

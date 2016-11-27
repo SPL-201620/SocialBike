@@ -17,6 +17,8 @@ public class BikeHelp {
     private BikeHelpType type;
     private int lowerPrice;
     private int upperPrice;
+    @Transient
+    private double distance;
 
     public long getId() {
         return id;
@@ -72,5 +74,13 @@ public class BikeHelp {
 
     public void setUpperPrice(int upperPrice) {
         this.upperPrice = upperPrice;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 }

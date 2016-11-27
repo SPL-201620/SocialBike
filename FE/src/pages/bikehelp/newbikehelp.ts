@@ -18,13 +18,13 @@ export class NewBikeHelpPage {
     public name: string;
     public type: string;
     public marker: any;
-    public priceRange: {lower: 30, upper: 60};
+    public priceRange:any =  { lower: 30, upper: 60 };
 
     constructor(public navCtrl: NavController, public viewCtrl: ViewController, public platform: Platform, public params: NavParams, public utilService: UtilProvider, public bikehelpService: BikeHelpService) {
-
+        
     }
 
-    ngOnInit() {
+    ionViewWillEnter() {
         this.loadMap();
     }
 
@@ -48,19 +48,19 @@ export class NewBikeHelpPage {
         }
     }
 
-    valid(){
+    valid() {
         let valid = true;
-        if(!this.name){
+        if (!this.name) {
             this.utilService.doAlert("Error", "Add a name!", ['OK']);
             valid = false;
         }
-        if(!this.type){
+        if (!this.type) {
             this.utilService.doAlert("Error", "Select a Type!", ['OK']);
-            valid = false;            
+            valid = false;
         }
-        if(!this.marker){
+        if (!this.marker) {
             this.utilService.doAlert("Error", "Add location!", ['OK']);
-            valid = false;            
+            valid = false;
         }
         return valid;
     }

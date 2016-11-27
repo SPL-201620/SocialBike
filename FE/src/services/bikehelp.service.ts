@@ -1,6 +1,6 @@
 import { IBikeHelp } from '../shared/interfaces';
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -20,8 +20,17 @@ export class BikeHelpService {
             .catch(this.handleError);
     }
 
-    getAllBikeHelps(){
+    getAllBikeHelps() {
         return this.http.get(this.url).map(this.extractData);
+    }
+
+    getBikeHelpsByDistance(lat: number, lon: number, range: number) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('range', range.toString());
+        params.set('latFrom', lat.toString());
+        params.set('lonFrom', lon.toString());
+
+        return this.http.get(this.url+"/distance", {search: params}).map(this.extractData);
     }
 
     handleError(error: any): any {

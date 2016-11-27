@@ -28,6 +28,10 @@ export class RouteService {
         return this.http.get(this.url + "/ByUserId/" + userId).map(this.extractData);
     }
 
+    getUserActiveRoute(userId:number): Observable<IRoute>{
+        return this.http.get(this.url + "/active/" + userId).map(this.extractData);
+    }
+
     saveRoute(route: IRoute) {
         return this.http.post(this.url, route)
             .map(this.extractData)
@@ -40,9 +44,10 @@ export class RouteService {
             .catch(this.handleError);
     }
 
-    updateRoute(route: IRoute): Observable<IRoute[]> {
+    updateRoute(route: IRoute) {
         return this.http.put(this.url + route.id, route)
-            .map(this.extractData);
+            .map(this.extractData)
+            .catch(this.handleError);
     }
 
     addUserToGroup(groupRouteId: number, userDBId: number): Observable<any> {

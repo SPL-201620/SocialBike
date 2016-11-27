@@ -18,7 +18,7 @@ export class GroupRoutePage {
 
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.userService.getCurrentDBUserId().then(userDBId => {
       this.userDBId = userDBId;
       this.routeService.getGroupRoutes().subscribe((groupRoutes: GroupRouteRequest[]) => {

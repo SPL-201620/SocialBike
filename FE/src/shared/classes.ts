@@ -90,6 +90,7 @@ export class BikeHelp implements IBikeHelp{
     public type: string;
     public lowerPrice: number;
     public upperPrice: number;
+    public distance: number;
     
     constructor(){
 
