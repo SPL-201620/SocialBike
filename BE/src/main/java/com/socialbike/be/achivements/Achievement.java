@@ -7,25 +7,51 @@ import java.util.List;
  * Created by SAN on 27/11/2016.
  */
 @Entity
-public class Achievement
+public abstract class Achievement
 {
     @Id
     @GeneratedValue
     private long id;
     private String name;
+    private int value;
+    private String activation;
+    private int activationValue;
+    private int initialValue;
     @ElementCollection
     @CollectionTable(
-            name="ACHIEVEMENT_PROPERTIES",
+            name="PROPERTIE_TAGS",
             joinColumns=@JoinColumn(name="OWNER_ID")
     )
-    @Column(name="PROPERTY_NAME")
-    private List<String> properties;
+    @Column(name="TAG")
+    private List<String> tags;
     private boolean unlocked;
 
-    public Achievement(String name, List<String> properties) {
+    public Achievement(String name, int initialValue, String activation, int activationValue, List<String> tags) {
         this.name 		= name;
-        this.properties = properties;
+        this.initialValue = initialValue;
+        this.activation = activation;
+        this.activationValue = activationValue;
+        this.tags = tags;
         this.unlocked 	= false;
+    }
+
+    public boolean isActive() {
+        boolean active = false;
+
+        switch (this.activation) {
+            case Achieve.ACTIVE_IF_GREATER_THAN:
+                active = this.value > this.activationValue;
+                break;
+            case Achieve.ACTIVE_IF_LESS_THAN:
+                active = this.value < this.activationValue;
+                break;
+        }
+
+        return active;
+    }
+
+    public void reset() {
+        this.value = this.initialValue;
     }
 
     public long getId() {
@@ -44,12 +70,44 @@ public class Achievement
         this.name = name;
     }
 
-    public List<String> getProperties() {
-        return properties;
+    public int getValue() {
+        return value;
     }
 
-    public void setProperties(List<String> properties) {
-        this.properties = properties;
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public String getActivation() {
+        return activation;
+    }
+
+    public void setActivation(String activation) {
+        this.activation = activation;
+    }
+
+    public int getActivationValue() {
+        return activationValue;
+    }
+
+    public void setActivationValue(int activationValue) {
+        this.activationValue = activationValue;
+    }
+
+    public int getInitialValue() {
+        return initialValue;
+    }
+
+    public void setInitialValue(int initialValue) {
+        this.initialValue = initialValue;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
     public boolean isUnlocked() {
@@ -58,9 +116,5 @@ public class Achievement
 
     public void setUnlocked(boolean unlocked) {
         this.unlocked = unlocked;
-    }
-
-    public String toString(){
-        return "[Achivement " + this.name + "]";
     }
 }
