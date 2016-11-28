@@ -74,5 +74,18 @@
 			</ion-card-content>
 		</ion-card>
 	</div>
-	<social-media-share></social-media-share>
+<br>
+<br>
+	<div class="buttons" *ngIf="socialMediaFeat">
+		Get Social Sharing Your Experience
+		<br>
+		<button ion-button icon-left (click)="getSocial('Facebook')" small>
+			<ion-icon name="logo-facebook"></ion-icon>
+		</button>
+		<button ion-button icon-left (click)="getSocial('Twitter')" small>
+			<ion-icon name="logo-twitter"></ion-icon>
+		</button>
+	</div>
 </ion-content>
+
+

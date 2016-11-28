@@ -24,8 +24,7 @@ import { LogInPage } from '../pages/login/login';
 import { SocialMediaLogin } from '../components/social-media-login/social-media-login';
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
 import { Storage } from '@ionic/storage';
-
-import { SocialMediaShareComponent } from '../components/social-media-share/social-media-share';
+import {SocialBikeShareService} from '../services/socialshare.service';
 
 
 export const firebaseConfig = {
@@ -57,7 +56,6 @@ const myFirebaseAuthConfig = {
     BikeHelpPage,
     NewBikeHelpPage,
     BikeHelpMapPage,
-    SocialMediaShareComponent,
     BikeconfiguratorPage
   ],
   imports: [
@@ -82,6 +80,6 @@ const myFirebaseAuthConfig = {
     BikeHelpMapPage,
     BikeconfiguratorPage
   ],
-  providers: [UserService, RouteService, ChatService, Storage, UtilProvider, BikeHelpService, BikeConfiguratorService]
+  providers: [UserService, RouteService, ChatService, Storage, UtilProvider, BikeHelpService, BikeConfiguratorService, SocialBikeShareService]
 })
 export class AppModule { }
