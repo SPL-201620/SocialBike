@@ -71,7 +71,7 @@ export class SocialMediaLogin {
             break;
           case "Twitter":
             myFirebaseSocialAuthConfig.provider = AuthProviders.Twitter;
-            myFirebaseSocialAuthConfig.method = AuthMethods.Redirect;
+            myFirebaseSocialAuthConfig.method = AuthMethods.Popup;
             break;
         }
         // Llama los servicios de usuario para hacer el login via firebase
