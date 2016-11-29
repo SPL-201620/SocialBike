@@ -5,6 +5,9 @@ import { RouteService } from '../../services/route.service.';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { socialMediaFeature } from '../../shared/variabilityconst';
+import {SocialBikeShareService} from '../../services/socialshare.service';
+
 @Component({
   selector: 'page-group',
   templateUrl: 'grouproute.html'
@@ -13,8 +16,9 @@ import { NavController } from 'ionic-angular';
 export class GroupRoutePage {
   groupRoutes: GroupRouteRequest[];
   userDBId: number;
+  public socialMediaFeat = socialMediaFeature;
 
-  constructor(public navCtrl: NavController, public routeService: RouteService, public userService: UserService) {
+  constructor(public navCtrl: NavController, public routeService: RouteService, public userService: UserService, public socialMedia: SocialBikeShareService) {
 
   }
 
@@ -44,4 +48,17 @@ export class GroupRoutePage {
       });
     });
   }
-}
+
+  getSocial(socialNet:string) {
+        console.log("Sharing via:" + socialNet);
+        var socialMessage:string;
+        if (this.groupRoutes.length > 0)
+            socialMessage = " Took a groupal road with many more and enjoyed, shared by SocialBike";
+        else
+            socialMessage = " Wants to participate in a Social Bike Group, shared by SocialBike";
+          
+        this.socialMedia.getSocial(socialNet, socialMessage);
+
+    }
+
+} 
