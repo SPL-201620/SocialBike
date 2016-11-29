@@ -1,7 +1,9 @@
+import { AchievementPage } from '../pages/about/achievement';
 import { BikeHelpMapPage } from '../pages/bikehelp/bikehelpmap';
 import { NewBikeHelpPage } from '../pages/bikehelp/newbikehelp';
 import { BikeconfiguratorPage } from '../pages/bikeconfigurator/bikeconfigurator';
 import { BikeHelpService } from '../services/bikehelp.service';
+import { AchievementService } from '../services/achievement.service';
 import { BikeConfiguratorService } from '../services/bikeconfigurator.service';
 import { BikeHelpPage } from '../pages/bikehelp/bikehelp';
 import { UtilProvider } from '../services/utils';
@@ -56,7 +58,8 @@ const myFirebaseAuthConfig = {
     BikeHelpPage,
     NewBikeHelpPage,
     BikeHelpMapPage,
-    BikeconfiguratorPage
+    BikeconfiguratorPage,
+    AchievementPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -78,8 +81,9 @@ const myFirebaseAuthConfig = {
     BikeHelpPage,
     NewBikeHelpPage,
     BikeHelpMapPage,
-    BikeconfiguratorPage
+    BikeconfiguratorPage,
+    AchievementPage
   ],
-  providers: [UserService, RouteService, ChatService, Storage, UtilProvider, BikeHelpService, BikeConfiguratorService, SocialBikeShareService]
+  providers: [UserService, RouteService, ChatService, Storage, UtilProvider, BikeHelpService, BikeConfiguratorService, SocialBikeShareService, AchievementService]
 })
 export class AppModule { }

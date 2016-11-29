@@ -67,3 +67,10 @@ export interface IBike {
 	gearControl: number;
 	matchRate: number;
 }
+
+export interface IUserAchievement { 
+    name: string;
+    value: number;
+    valueToUnlock: number;
+    unlocked: boolean;
+}

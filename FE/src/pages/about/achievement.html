@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+        </ion-buttons>
+        <ion-title>My Achievements</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <div *ngFor="let achievement of achievements">
+            <ion-card>
+                <ion-card-header>
+                    {{achievement.name}}
+                    <ion-icon *ngIf="achievement.unlocked" name="checkmark-circle"></ion-icon>
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-item>
+                        Current: {{achievement.value}}
+                    </ion-item>
+                    <ion-item>
+                        To Unlock: {{achievement.valueToUnlock }}
+                    </ion-item>
+                </ion-card-content>
+            </ion-card>
+        </div>
+    </ion-list>
+</ion-content>
