@@ -2,6 +2,8 @@ package com.socialbike.be.routes;
 
 import com.socialbike.be.users.User;
 import com.socialbike.be.users.UserRepository;
+import org.joda.time.DateTime;
+import org.joda.time.Period;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,9 +67,9 @@ public class RouteController {
     @ResponseStatus(value = HttpStatus.OK)
     public void updateRoute(@RequestBody AddRouteRequest addRouteRequest, @PathVariable("routeId") long routeId) {
         Route route = routeRepository.findOne(routeId);
-        long milliseconds = (addRouteRequest.getEndTime().getTime() - addRouteRequest.getStartTime().getTime());
-        long duration = TimeUnit.MILLISECONDS.toHours(milliseconds);
-        double speed = (route.getDistance()/1000) / duration;
+        Period period = new Period(new DateTime(addRouteRequest.getStartTime()), new DateTime(addRouteRequest.getEndTime()));
+        double speed = (route.getDistance()/1000) / ((double)period.getMinutes() / 60);
+        speed = Double.isInfinite(speed) ? 0 : speed;
         route.setFinished(addRouteRequest.isFinished());
         route.setEndTime(addRouteRequest.getEndTime());
         route.setSpeed(speed);

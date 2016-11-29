@@ -1,3 +1,4 @@
+import { AchievementPage } from './achievement';
 import { ChatPage } from '../contact/chat';
 import { IUser } from '../../shared/interfaces';
 import { UserService } from '../../services/user.service';
@@ -67,6 +68,11 @@ export class AboutPage {
 
   openChat(userChat: any) {
     let modal = this.modalCtrl.create(ChatPage, userChat);
+    modal.present();
+  }
+
+  showAchievements() {
+    let modal = this.modalCtrl.create(AchievementPage, this.user);
     modal.present();
   }
 }

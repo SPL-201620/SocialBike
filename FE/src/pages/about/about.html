@@ -3,6 +3,11 @@
 		<ion-title>
 			About
 		</ion-title>
+		<ion-buttons *ngIf="achivementsFeature" end>
+			<button ion-button icon-only (click)="showAchievements()">
+        		<ion-icon name="trophy"></ion-icon>
+      		</button>
+		</ion-buttons>
 	</ion-navbar>
 </ion-header>
 
