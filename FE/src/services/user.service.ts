@@ -15,7 +15,7 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class UserService {
 
-    private url: string = 'http://localhost:8080/users/';
+    private url: string = 'http://35.164.244.25:8080/users/';
 
     constructor(private http: Http, public af: AngularFire, public storage: Storage) {
     }

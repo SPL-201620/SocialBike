@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class AchievementService {
 
-    private url: string = 'http://localhost:8080/achievements/';
+    private url: string = 'http://35.164.244.25:8080/achievements/';
 
     constructor(private http: Http) {
     }

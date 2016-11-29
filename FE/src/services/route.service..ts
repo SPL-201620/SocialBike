@@ -10,8 +10,8 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class RouteService {
 
-    private url: string = 'http://localhost:8080/routes/';
-    private urlGroup: string = 'http://localhost:8080/grouproute/'
+    private url: string = 'http://35.164.244.25:8080/routes/';
+    private urlGroup: string = 'http://35.164.244.25:8080/grouproute/'
 
     constructor(private http: Http) {
     }

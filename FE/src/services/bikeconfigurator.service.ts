@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class BikeConfiguratorService {
 
-    private url: string = 'http://localhost:8080/bikeconfigurator/';
+    private url: string = 'http://35.164.244.25:8080/bikeconfigurator/';
 
     constructor(private http: Http) {
     }
