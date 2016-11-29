@@ -36,6 +36,7 @@ public class UserAchievementController {
             userAchievementRequest.setName(achievement.getName());
             userAchievementRequest.setUnlocked(achievement.isUnlocked());
             userAchievementRequest.setValue(achievement.getValue());
+            userAchievementRequest.setValueToUnlock(achievement.getActivationValue());
             transformed.add(userAchievementRequest);
         }
         return transformed;

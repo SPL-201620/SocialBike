@@ -34,8 +34,22 @@ public class Achieve {
         User user = userRepository.getOne(userId);
         List<Achievement> achievements = new ArrayList<>();
         for (InitialAchievement initialAchievement : initialAchievements) {
-            achievements.add(initialAchievement.getAchievement());
+            Achievement achievementBase = initialAchievement.getAchievement();
+            Achievement achievement =  new Achievement();
+            achievement.setUnlocked(achievementBase.isUnlocked());
+            achievement.setValue(achievementBase.getValue());
+            achievement.setName(achievementBase.getName());
+            achievement.setActivation(achievementBase.getActivation());
+            achievement.setActivationValue(achievementBase.getActivationValue());
+            achievement.setInitialValue(achievementBase.getInitialValue());
+            List<String> tags = new ArrayList<>();
+            for (String tag: achievementBase.getTags()) {
+                tags.add(tag);
+            }
+            achievement.setTags(tags);
+            achievements.add(achievement);
         }
+        achievementRepository.save(achievements);
         UserAchievements userAchievements = new UserAchievements();
         userAchievements.setAchievements(achievements);
         userAchievements.setUser(user);

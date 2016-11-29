@@ -7,7 +7,7 @@ import java.util.List;
  * Created by SAN on 27/11/2016.
  */
 @Entity
-public abstract class Achievement
+public class Achievement
 {
     @Id
     @GeneratedValue
@@ -26,13 +26,7 @@ public abstract class Achievement
     private List<String> tags;
     private boolean unlocked;
 
-    public Achievement(String name, int initialValue, String activation, int activationValue, List<String> tags) {
-        this.name 		= name;
-        this.initialValue = initialValue;
-        this.activation = activation;
-        this.activationValue = activationValue;
-        this.tags = tags;
-        this.unlocked 	= false;
+    public Achievement() {
     }
 
     public boolean isActive() {

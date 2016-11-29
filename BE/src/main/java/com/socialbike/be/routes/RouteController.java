@@ -68,7 +68,8 @@ public class RouteController {
     public void updateRoute(@RequestBody AddRouteRequest addRouteRequest, @PathVariable("routeId") long routeId) {
         Route route = routeRepository.findOne(routeId);
         Period period = new Period(new DateTime(addRouteRequest.getStartTime()), new DateTime(addRouteRequest.getEndTime()));
-        double speed = (route.getDistance()/1000) / (period.getMinutes()/60);
+        double speed = (route.getDistance()/1000) / ((double)period.getMinutes() / 60);
+        speed = Double.isInfinite(speed) ? 0 : speed;
         route.setFinished(addRouteRequest.isFinished());
         route.setEndTime(addRouteRequest.getEndTime());
         route.setSpeed(speed);

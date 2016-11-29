@@ -6,6 +6,7 @@ package com.socialbike.be.achivements;
 public class UserAchievementRequest {
     public String name;
     public int value;
+    public int valueToUnlock;
     public boolean unlocked;
 
     public String getName() {
@@ -22,6 +23,14 @@ public class UserAchievementRequest {
 
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public int getValueToUnlock() {
+        return valueToUnlock;
+    }
+
+    public void setValueToUnlock(int valueToUnlock) {
+        this.valueToUnlock = valueToUnlock;
     }
 
     public boolean isUnlocked() {
