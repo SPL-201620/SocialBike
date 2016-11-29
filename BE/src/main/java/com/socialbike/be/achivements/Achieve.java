@@ -1,36 +1,64 @@
 package com.socialbike.be.achivements;
 
+import com.socialbike.be.users.User;
+import com.socialbike.be.users.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by SAN on 27/11/2016.
  */
+@Component
 public class Achieve {
 
-    private UserAchievementsRepository userAchievementsRepository;
-    private AchievementRepository achievementRepository;
+    private static UserAchievementsRepository userAchievementsRepository;
+    private static AchievementRepository achievementRepository;
+    private static InitialAchievementsRepository initialAchievementsRepository;
+    private static UserRepository userRepository;
     public static final String ACTIVE_IF_GREATER_THAN = ">";
     public static final String ACTIVE_IF_LESS_THAN = "<";
 
-    public Achieve(UserAchievementsRepository userAchievementsRepository, AchievementRepository achievementRepository){
-        this.userAchievementsRepository = userAchievementsRepository;
-        this.achievementRepository = achievementRepository;
+    @Autowired
+    public Achieve(UserAchievementsRepository userAchievementsRepository, AchievementRepository achievementRepository, InitialAchievementsRepository initialAchievementsRepository, UserRepository userRepository){
+        Achieve.userAchievementsRepository = userAchievementsRepository;
+        Achieve.achievementRepository = achievementRepository;
+        Achieve.initialAchievementsRepository = initialAchievementsRepository;
+        Achieve.userRepository = userRepository;
     }
 
-    public void addValue(long userId, int value, List<String> tags){
-        UserAchievements userAchievement = this.userAchievementsRepository.findByUserId(userId).get(0);
-        List<Achievement> achievements = getAchievementsByTags(userAchievement.getAchievements(), tags);
-        for (Achievement achievement : achievements) {
-            achievement.setValue(achievement.getValue() + value);
-            achievement.setUnlocked(unlockAchievement(achievement));
+    public static void initializeUser(long userId){
+        List<InitialAchievement> initialAchievements = initialAchievementsRepository.findAll();
+        User user = userRepository.getOne(userId);
+        List<Achievement> achievements = new ArrayList<>();
+        for (InitialAchievement initialAchievement : initialAchievements) {
+            achievements.add(initialAchievement.getAchievement());
         }
-        this.achievementRepository.save(achievements);
+        UserAchievements userAchievements = new UserAchievements();
+        userAchievements.setAchievements(achievements);
+        userAchievements.setUser(user);
+        userAchievementsRepository.save(userAchievements);
     }
 
-    private boolean unlockAchievement(Achievement achievement) {
+    public static void addValue(long userId, int value, List<String> tags){
+        List<UserAchievements> userAchievements = userAchievementsRepository.findByUserId(userId);
+        if(userAchievements.size() > 0) {
+            UserAchievements userAchievement = userAchievements.get(0);
+            List<Achievement> achievements = getAchievementsByTags(userAchievement.getAchievements(), tags);
+            for (Achievement achievement : achievements) {
+                achievement.setValue(achievement.getValue() + value);
+                achievement.setUnlocked(unlockAchievement(achievement));
+            }
+            achievementRepository.save(achievements);
+        }else{
+            initializeUser(userId);
+            addValue(userId, value, tags);
+        }
+    }
+
+    private static boolean unlockAchievement(Achievement achievement) {
         boolean unlock = false;
         switch (achievement.getActivation()) {
             case Achieve.ACTIVE_IF_GREATER_THAN:
@@ -43,7 +71,7 @@ public class Achieve {
         return unlock;
     }
 
-    private List<Achievement> getAchievementsByTags(List<Achievement> achievements, List<String> tags){
+    private static List<Achievement> getAchievementsByTags(List<Achievement> achievements, List<String> tags){
         List<Achievement> achievementsFound = new ArrayList<>();
         for(Achievement achievement : achievements){
             if(hasTag(achievement, tags))
@@ -52,7 +80,7 @@ public class Achieve {
         return achievementsFound;
     }
 
-    private boolean hasTag(Achievement achievement, List<String> tags) {
+    private static boolean hasTag(Achievement achievement, List<String> tags) {
         boolean hasTag = false;
 
         for (String tag : tags) {

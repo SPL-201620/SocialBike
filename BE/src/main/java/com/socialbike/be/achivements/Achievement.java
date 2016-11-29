@@ -19,8 +19,8 @@ public abstract class Achievement
     private int initialValue;
     @ElementCollection
     @CollectionTable(
-            name="PROPERTIE_TAGS",
-            joinColumns=@JoinColumn(name="OWNER_ID")
+            name="ACHIEVEMENT_TAGS",
+            joinColumns=@JoinColumn(name="ACHIEVEMENT_ID")
     )
     @Column(name="TAG")
     private List<String> tags;

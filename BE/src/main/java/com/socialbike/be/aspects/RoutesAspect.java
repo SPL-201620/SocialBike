@@ -1,27 +1,22 @@
 package com.socialbike.be.aspects;
 
-import org.aspectj.lang.JoinPoint;
+import com.socialbike.be.achivements.Achieve;
+import com.socialbike.be.routes.AddRouteRequest;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
 
 /**
  * Created by SAN on 28/11/2016.
  */
 @Aspect
+@Component
 public class RoutesAspect {
-    @Pointcut("execution(* addRoute(..))")
-    public void puntoCorte() {
-    }
-
-    @Before("puntoCorte()")
-    public void antesPunto(JoinPoint joinPoint) {
-        System.out.println("Advice antes de foo");
-    }
-
-    @After("puntoCorte()")
-    public void despuesPunto(JoinPoint joinPoint) {
-        System.out.println("Advice después de foo");
+    @After(value = "execution(* addRoute(com.socialbike.be.routes.AddRouteRequest)) && args(route)")
+    public void afterNewRoute(AddRouteRequest route) {
+        System.out.println(route);
+        Achieve.addValue(route.getUserId(),1 , Arrays.asList("route"));
     }
 }

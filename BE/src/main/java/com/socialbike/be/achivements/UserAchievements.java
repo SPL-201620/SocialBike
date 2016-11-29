@@ -19,9 +19,9 @@ public class UserAchievements {
     @OneToMany(cascade = CascadeType.ALL, targetEntity = Achievement.class, fetch = FetchType.EAGER)
     @JoinTable
             (
-                    name = "USER_ACHIVEMENTS",
-                    joinColumns = {@JoinColumn(name = "ACHIVEMENT_ID")},
-                    inverseJoinColumns = {@JoinColumn(name = "USER_ID")}
+                    name = "USER_ACHIEVEMENT_ACHIEVEMENT",
+                    joinColumns = {@JoinColumn(name = "USER_ACHIEVEMENT_ID")},
+                    inverseJoinColumns = {@JoinColumn(name = "ACHIEVEMENT_ID")}
             )
     private List<Achievement> achievements;
 

@@ -7,9 +7,28 @@ import java.util.List;
  * Created by SAN on 27/11/2016.
  */
 @Entity
-public class InitialAchievement extends Achievement{
+public class InitialAchievement{
 
-    public InitialAchievement(String name, int initialValue, String activation, int activationValue, List<String> tags) {
-        super(name, initialValue, activation, activationValue, tags);
+    @Id
+    @GeneratedValue
+    private long id;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ACHIEVEMENT_ID")
+    private Achievement achievement;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Achievement getAchievement() {
+        return achievement;
+    }
+
+    public void setAchievement(Achievement achievement) {
+        this.achievement = achievement;
     }
 }
