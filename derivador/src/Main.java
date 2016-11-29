@@ -5,8 +5,12 @@ public class Main {
         System.out.println("Press return to continue.");
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         in.read();
+
+        DerivatorFrontManager derivator = new DerivatorFrontManager();
+        derivator.setConfigurations();
+
     }
-    
+
     public void ReadConfiguration(String path){
     	
     }
