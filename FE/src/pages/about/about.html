@@ -3,7 +3,7 @@
 		<ion-title>
 			About
 		</ion-title>
-		<ion-buttons end>
+		<ion-buttons *ngIf="achivementsFeature" end>
 			<button ion-button icon-only (click)="showAchievements()">
         		<ion-icon name="trophy"></ion-icon>
       		</button>
