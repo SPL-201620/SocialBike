@@ -1,4 +1,4 @@
-import {IBikeHelp, IGroupRoute, IRoute, IUser, IUserLogin, IBike} from './interfaces';
+import {IBikeHelp, IGroupRoute, IRoute, IUser, IUserLogin, IBike, IUserAchievement} from './interfaces';
 
 export class User implements IUser {
 
@@ -107,5 +107,16 @@ export class Bike implements IBike {
     
     constructor(){
     
+    }
+}
+
+export class UserAchievement implements IUserAchievement { 
+    name: string;
+    value: number;
+    valueToUnlock: number;
+    unlocked: boolean;
+
+    constructor(){
+
     }
 }

@@ -2,4 +2,3 @@
 export const socialMediaFeature = true; // Si es true prende el feature de variabilidad de Social Media
 export const bikeConfiguratorFeature = true; // Si es true prende el feature de variabilidad de Social Media
 export const bikeHelpsFeature = true;
-export const achivementsFeature = true;
