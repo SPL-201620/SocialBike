@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, AlertController  } from 'ionic-angular';
 import { Bike } from '../../shared/classes';
 import { BikeConfiguratorService } from '../../services/bikeconfigurator.service';
-
+import { socialMediaFeature } from '../../shared/variabilityconst';
+import {SocialBikeShareService} from '../../services/socialshare.service';
 
 
 @Component({
@@ -19,8 +20,10 @@ export class BikeconfiguratorPage {
   public colorbt = '';
   public colorft = '';
   public colorws = '';
+  public socialMediaFeat = socialMediaFeature;
+    
 
-  constructor(public navCtrl: NavController, private bikeConfService: BikeConfiguratorService, public alertCtrl: AlertController) {}
+  constructor(public navCtrl: NavController, private bikeConfService: BikeConfiguratorService, public alertCtrl: AlertController, public socialMedia: SocialBikeShareService) {}
 
   ionViewDidLoad() {
     console.log('Hello BikeconfiguratorPage Page');
@@ -84,4 +87,13 @@ export class BikeconfiguratorPage {
         });
         alert.present();
   }
+
+  getSocial(socialNet:string) {
+        var socialMessage;
+        console.log("Sharing via:" + socialNet);
+        socialMessage = " Configured a brand new nice Bycicle using Social Bike Configurator, shared by SocialBike"
+        this.socialMedia.getSocial(socialNet, socialMessage);
+
+    }
+
 }

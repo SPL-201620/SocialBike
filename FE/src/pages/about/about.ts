@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage'
 
+import { achivementsFeature } from '../../shared/variabilityconst';
+
+
+
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html'
@@ -20,6 +24,7 @@ export class AboutPage {
   private user: IUser;
   public friends: IUser[];
   public currentUserId: string;
+  public achivementsFeature = achivementsFeature;
 
   constructor(public navCtrl: NavController, public storage: Storage, public userService: UserService, public alertCtrl: AlertController, public modalCtrl: ModalController) {
 
